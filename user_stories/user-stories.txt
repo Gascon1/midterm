@@ -1,0 +1,18 @@
+Requirements :
+
+- Users should be able to register, log in, log out and update their profile.
+
+- The user simply has to add the name of the thing, and it gets put into the correct list.
+
+- Each todo created should be categorized as one of:
+
+    Film / Series (To watch)
+    Restaurants, cafes, etc. (To eat)
+    Books (To read)
+    Products (To buy)
+
+- Users should be able to change a category of an item in case it was mis-categorized or
+  could not be categorized at all.
+
+
+
