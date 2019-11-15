@@ -8,6 +8,7 @@ Requirements/Features :
     Restaurants, cafes, etc. (To eat)
     Books (To read)
     Products (To buy)
+    * Not categorized (special category for todo items not categorized)
 
 - Users should be able to change a category of an item in case it was mis-categorized or
   could not be categorized at all.
