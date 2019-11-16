@@ -10,6 +10,17 @@ request(URL, function(error, response, body) {
   // console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
   // console.log('typeof body:', body.search('Products')); // Print the HTML for the Google homepage.
   let parsedBody = JSON.parse(body);
-  console.log(parsedBody.queryresult.datatypes);
-  console.log(URL)
+
+
+
+  // checking if the query succeeds
+  if (parsedBody.queryresult.success) {
+    console.log('datatype : ', parsedBody.queryresult.datatypes);
+    console.log('body ; ', body)
+
+
+
+
+  }
+
 });
