@@ -10,8 +10,8 @@ request(URL, function(error, response, body) {
   // console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
   // console.log('typeof body:', body.search('Products')); // Print the HTML for the Google homepage.
   let parsedBody = JSON.parse(body);
-  let datatype = parsedBody.queryresult.datatypes;
-
+  let querySuccess = parsedBody.queryresult.success;
+  let lowerBody = body.toLowerCase();
   // checking if the query succeeds
   // if (parsedBody.queryresult.success) {
   //   console.log('datatype : ', datatype);
@@ -23,10 +23,19 @@ request(URL, function(error, response, body) {
   //   }
 
   // }
-
-  if (parsedBody.queryresult.success) {
-    if (body.toLowerCase().search("movie")) {
+console.log(body);
+  if (querySuccess) {
+    if (lowerBody.includes("movie")) {
       console.log("this is a movie");
+    }
+    if (lowerBody.includes("book")) {
+      console.log("this is a book");
+    }
+    if (lowerBody.includes("product")) {
+      console.log("this is a product");
+    }
+    if (lowerBody.includes("restaurant")) {
+      console.log("this is a restaurant");
     }
   }
 });
