@@ -5,6 +5,6 @@ CREATE TABLE todo_items (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   is_completed BOOLEAN,
-  category_id REFERENCES categories(id) ON DELETE CASCADE,
-  user_id REFERENCES users(id)
+  category_id INTEGER REFERENCES categories(id),
+  user_id INTEGER REFERENCES users(id)
 );

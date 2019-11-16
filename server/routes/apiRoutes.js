@@ -1,5 +1,5 @@
 const request = require("request");
-const userInput = "3 amigos";
+const userInput = "breaking bad";
 const encodedUserInput = encodeURI(userInput);
 const AppId = "YJ5XA9-EUGVJUHHHH";
 
@@ -11,8 +11,10 @@ request(URL, function(error, response, body) {
   let lowerBody = body.toLowerCase();
 
   if (querySuccess) {
-    if (lowerBody.includes("movie")) {
+    if (lowerBody.search("movie" || "television")) {
       console.log("this is a movie");
+
+
     }
     if (lowerBody.includes("book")) {
       console.log("this is a book");
