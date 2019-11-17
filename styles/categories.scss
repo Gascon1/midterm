@@ -14,13 +14,36 @@ header {
   display: flex;
   align-items: center;
   padding: 10px 5px;
-  margin: 0 5px 10px;
+  margin: 0 5px 5px;
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
 
 ul {
-  display: inline-block;
+  display: flex;
   margin: 0;
-  padding: 5px 28px;
+  padding: 0;
+  list-style-type: none;
+  flex-direction: column;
+  align-content: center;
+}
+
+.custom-bullets {
+  font-size: 0.7em;
+  vertical-align: middle;
+  align-content: inherit;
+  padding: 0 0.5em 0.25em 1em;
+}
+
+ul li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+
+.more-settings {
+  font-size: 0.7em;
+  vertical-align: center;
+  padding: 0 0.8em;
+  align-self: center;
 }
