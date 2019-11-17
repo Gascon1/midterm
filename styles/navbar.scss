@@ -1,11 +1,12 @@
 $textwhite: #fbfef9;
+$darkblue: #170f77;
 
 nav {
   position: sticky;
   z-index: 10;
   height: 100px;
-  background-color: #170f77;
-  padding: 1em;;
+  background-color: $darkblue;
+  padding: 1em;
 }
 
 nav button.main-buttons {
@@ -23,7 +24,23 @@ nav button.main-buttons:hover {
   background-color: rgba(251, 254, 249, 0.25);
 }
 
-.container {
-  display:flex;
+.container-flex {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+textarea {
+  width: 100%;
+  height: 30px;
+  resize: none;
+  color: $textwhite;
+  background-color: rgba(251, 254, 249, 0.2);
+  border-style: none;
+  outline: none;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 1em;
+  vertical-align: middle;
 }
