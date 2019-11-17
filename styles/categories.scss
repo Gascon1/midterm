@@ -9,8 +9,18 @@ main.category {
 header {
   font-style: normal;
   font-weight: bold;
-  font-size: 42px;
-  line-height: 49px;
+  font-size: 40px;
+  line-height: 0.75em;
   display: flex;
   align-items: center;
+  padding: 10px 5px;
+  margin: 0 5px 10px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+ul {
+  display: inline-block;
+  margin: 0;
+  padding: 5px 28px;
 }
