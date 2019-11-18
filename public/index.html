@@ -39,7 +39,9 @@
         <button id="login" class="main-buttons">Logout</button>
       </div>
     </div>
-    <textarea wrap="off" id="add-item" name="text" placeholder="Add an item to your smartlist..."></textarea>
+    <form method="POST" action="/new">
+      <textarea wrap="off" id="add-item" name="text" placeholder="Add an item to your smartlist..."></textarea>
+    </form>
   </nav>
   <section id="standalone" class="category">
     <header>
