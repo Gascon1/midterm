@@ -12,9 +12,9 @@
 $(document).ready(function () {
 
   //Toggles the display of category items box
-  const $categoryToggle = $(".header-toggle");
+  const $categoryToggle = $("#movie-category-header");
   $categoryToggle.on("click", function () {
-    $(".category-items").slideToggle(700, function () {
+    $("#movie-category-items").slideToggle(700, function () {
     });
 
   });
