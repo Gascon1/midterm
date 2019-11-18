@@ -13,7 +13,7 @@ $(document).ready(function () {
 
   const $categoryToggle = $(".category-header");
 
-    //Toggles the display of category icon
+  //Toggles the display of category icon
   $categoryToggle.on("click", function () {
     $(this).children("i").toggleClass("open")
 
