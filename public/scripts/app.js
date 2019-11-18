@@ -25,11 +25,16 @@ $(document).ready(function () {
   const $register = $('#profile');
 
   $register.on('click', function () {
-    $('main').slideToggle(700, function () {
 
-      $('#standalone').slideToggle(700);
-    });
-
+    if ($('#standalone').css('display') === 'none') {
+      $('main').slideToggle(700, function () {
+        $('#standalone').slideToggle(700);
+      });
+    } else {
+      $('#standalone').slideToggle(700, function () {
+        $('main').slideToggle(700)
+      });
+    }
   })
 
 });
