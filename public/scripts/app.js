@@ -11,12 +11,17 @@
 
 $(document).ready(function () {
 
-  //Toggles the display of category items box
-  const $categoryToggle = $("#movie-category-header");
+  const $categoryToggle = $(".category-header");
+
+    //Toggles the display of category icon
   $categoryToggle.on("click", function () {
-    $("#movie-category-items").slideToggle(700, function () {
-    });
+    $(this).children("i").toggleClass("open")
+
+    //Toggles the display of category items box
+    $(this).siblings(".category-items").slideToggle(700);
 
   });
 
-})
+
+
+});

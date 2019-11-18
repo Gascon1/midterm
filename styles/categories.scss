@@ -15,8 +15,25 @@ header {
   align-items: center;
   padding: 10px 5px;
   margin: 0 5px 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+
+
+  .fa-caret-down {
+    font-size: 0.5em;
+    padding-right: 5px;
+    transform: rotate(0deg);
+    transform-origin: 50% 50%;
+    transition: transform 0.7s ease-in-out;
+  }
+
+  .fa-caret-down.open {
+    font-size: 0.5em;
+    padding-right: 5px;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: transform 0.7s ease-in-out;
+  }
+
+
 }
 
 ul {
@@ -26,13 +43,15 @@ ul {
   list-style-type: none;
   flex-direction: column;
   align-content: center;
+  border-top-style: solid;
+  border-top-width: 1px;
 }
 
 .custom-bullets {
   font-size: 0.7em;
   vertical-align: middle;
   align-content: inherit;
-  padding: 0 0.5em 0.25em 1em;
+  padding: 0 0.5em 0.25em 1.2em;
 }
 
 ul li {
