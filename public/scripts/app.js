@@ -11,7 +11,7 @@
 
 
 /**function to generate a category (html) */
-const createTweetElement = function (tweet) {
+const createCategoryElement = function (db) {
   // header
   let $category = $('<main>').addClass('category');
   let $header = $('<header>').addClass('category-header');
