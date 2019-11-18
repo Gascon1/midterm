@@ -1,7 +1,7 @@
 $textwhite: #fbfef9;
-$navblue: #001680;
-$darkblue: #00106b;
-$bluetext: #001A92;
+$richblack: #0b0b23;
+$darkblue: #222238;
+$buttonblue: #08A6FF;
 
 
 nav {
@@ -10,25 +10,29 @@ nav {
   z-index: 10;
   top: 0;
   height: 100px;
-  background-color: $navblue;
+  background-color: $richblack;
   padding: 1em;
   flex-direction: column;
   justify-content: space-between;
+
 }
 
 nav button.main-buttons {
   color: $textwhite;
-  border-radius: 5px;
-  background-color: $darkblue;
+  border-radius: 2px;
+  background-color: $buttonblue;
   outline: 0;
   border-style: none;
   text-align: center;
   height: 1.8em;
   margin-left: 0.5em;
+  font-size: 0.9em;
+
 }
 
+
 nav button.main-buttons:hover {
-  background-color: $darkblue;
+  background-color: rgba(8, 164, 255, 0.829);
 }
 
 .container-flex {
@@ -41,13 +45,19 @@ textarea {
   width: 100%;
   height: 30px;
   resize: none;
-  color: #fbfef9;
-  background-color: $darkblue;
+  color: #000000;
+  background-color: $textwhite;
   border-style: none;
   outline: none;
   overflow: hidden;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 2px;
   vertical-align: middle;
   line-height: 26px; //FIX THIS TOMORROW
+}
+
+#logo {
+  font-family: Arimo;
+  font-weight: 700;
+  font-size: 1.5em;
 }

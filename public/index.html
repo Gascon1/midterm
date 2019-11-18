@@ -9,6 +9,9 @@
   <!-- Disabling Viewport Zooming-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- logo FONT -->
+  <link href="https://fonts.googleapis.com/css?family=Arimo:400,700&display=swap" rel="stylesheet">
+
   <!-- Icon Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
     integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
@@ -27,10 +30,10 @@
 <body>
   <nav>
     <div class="container-flex">
-      <span>Smarter</span>
+      <span id="logo">Smarter<sup>+</sup></span>
       <div>
-        <button class="main-buttons">Profile</button>
-        <button class="main-buttons">Logout</button>
+        <button id="profile" class="main-buttons">Profile</button>
+        <button id="profile" class="main-buttons">Logout</button>
       </div>
     </div>
     <textarea wrap="off" id="add-item" name="text" placeholder="Add an item to your smartlist..."></textarea>
