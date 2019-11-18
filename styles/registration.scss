@@ -1,9 +1,13 @@
 .registration {
   margin: 1em;
-
 }
 
 #standalone {
-  min-width: 100%;
+  max-width: 600px;
   display:none;
+  margin: 0 auto;
+}
+
+form button.main-buttons {
+  margin: 1em;
 }

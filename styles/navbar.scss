@@ -7,7 +7,7 @@ $buttonblue: #08A6FF;
 nav {
   display: flex;
   position: sticky;
-  z-index: 10;
+  z-index: 999;
   top: 0;
   min-height: 100px;
   background-color: $richblack;
@@ -17,7 +17,7 @@ nav {
 
 }
 
-.main-buttons {
+button.main-buttons {
   color: $textwhite;
   border-radius: 4px;
   background-color: $buttonblue;
@@ -25,9 +25,8 @@ nav {
   text-align: center;
   height: 1.8em;
   margin-left: 0.5em;
-  font-size: 1em;
-  outline: 0;
-
+  font-size: 1.1em;
+  outline: none;
 }
 
 
