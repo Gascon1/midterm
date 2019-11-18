@@ -1,0 +1,25 @@
+
+
+@media screen and (min-width: 768px) {
+  main {
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  section.category {
+    flex-basis: 49.2%;
+    margin: 0.5em 0;
+  }
+
+  nav button.main-buttons {
+    font-size: 1.2em;
+  }
+
+  #logo {
+    font-size: 2em;
+  }
+
+  div.container-flex {
+    padding-bottom: 1em;
+  }
+}

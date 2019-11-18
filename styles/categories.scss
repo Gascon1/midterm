@@ -1,15 +1,16 @@
-main.category {
+section.category {
   background: #222238;
   border-radius: 2px;
   // width: 95%;
   height: auto;
-  margin: 1em;
+
+  margin: 1em 0;
 }
 
 header {
   font-style: normal;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 2em;
   line-height: 0.75em;
   display: flex;
   align-items: center;

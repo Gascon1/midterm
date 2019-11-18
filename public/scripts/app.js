@@ -11,11 +11,11 @@
 
 
 /**function to generate a category (html) */
-const createCategoryElement = function (db) {
+const createCategoryElement = function (category,) {
   // header
-  let $category = $('<main>').addClass('category');
+  let $category = $('<section>').addClass('category');
   let $header = $('<header>').addClass('category-header');
-  let $categoryIcon = $('<i>').addClass('fas fa-caret-down');
+  let $categoryIcon = $('<i>').addClass('fas fa-caret-down').text(todo_items);
   $div.append($profilePic);
   let $span = $('<span>').text(tweet.user.name).addClass('name');
   $div.append($span);

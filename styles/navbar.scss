@@ -9,9 +9,9 @@ nav {
   position: sticky;
   z-index: 10;
   top: 0;
-  height: 100px;
+  min-height: 100px;
   background-color: $richblack;
-  padding: 1em;
+  padding: 1em 0;
   flex-direction: column;
   justify-content: space-between;
 
@@ -26,7 +26,7 @@ nav button.main-buttons {
   text-align: center;
   height: 1.8em;
   margin-left: 0.5em;
-  font-size: 0.9em;
+  font-size: 1em;
 
 }
 
