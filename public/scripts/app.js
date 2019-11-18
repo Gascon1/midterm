@@ -10,40 +10,44 @@
 // });
 
 
+
+const createCategoryHeader = function (todo){
+let $categoryHeader = $('<header>').addClass('category-header');
+  let $categoryIcon = $('<i>').addClass('fas fa-caret-down');
+  $header.append($categoryIcon).text(todo_items.category)
+  return $header
+}
+
+const createUnorderedListElement = function (todo_items_obj){
+  const todo_items = todo_items_obj.todo_items
+  let $categoryUnorderedList = $('<ul>').addClass('category-items')
+  for(const todo_item of todo_items){
+    let $listItem = createListItem(todo_item)
+    $categoryUnorderedList.append($listItem)
+  }
+  return $categoryUnorderedList
+}
+
+const createListItem = function(todo_item){
+  let $listItem = $('<li>')
+  let $div = $('<div>')
+  let $bulletIcon = $('<i>').addClass('far fa-circle custom-bullets');
+  let $span = $('<span>').text(todo_item.name)
+  let $settingsIcon = $('<i>').addClass('fas fa-ellipsis-v more-settings');
+
+  $listItem.append($div).append($bulletIcon)
+  .append($span).append($settingsIcon)
+  return $listItem
+}
 /**function to generate a category (html) */
-const createCategoryElement = function (category,) {
+const renderCategories = function (todo_items_obj) {
+  const todo_items = todo_items_obj.todo_items
+  for (const todo_item of todo_items){
+    let $category = createCategory(todo_item)
+    $('main').append()
+  }
   // header
-  let $category = $('<section>').addClass('category');
-  let $header = $('<header>').addClass('category-header');
-  let $categoryIcon = $('<i>').addClass('fas fa-caret-down').text(todo_items);
-  $div.append($profilePic);
-  let $span = $('<span>').text(tweet.user.name).addClass('name');
-  $div.append($span);
-  $header.append($div);
-  let handle = $('<span>').text(tweet.user.handle).addClass('handle');
-  $header.append(handle);
-  $tweet.append($header);
 
-  //content
-  let $main = $('<main>').text(tweet.content.text);
-  $tweet.append($main);
-
-  //footer
-  let date = new Date(tweet.created_at);
-  let timeElapsed = timeSince(date);
-  let $footer = $('<footer>').addClass('container')
-  let $timeSince = $('<span>').text(`${timeElapsed} ago`);
-  $footer.append($timeSince);
-  let $icons = $('<span>')
-  let $i2 = $('<i>').addClass('fas fa-flag reaction');
-  $icons.append($i2);
-  let $i = $('<i>').addClass('fas fa-retweet reaction');
-  $icons.append($i);
-  let $i3 = $('<i>').addClass('fas fa-heart reaction');
-  $icons.append($i3);
-  $footer.append($icons);
-  $tweet.append($footer);
-  return $tweet;
 }
 
 $(document).ready(function () {

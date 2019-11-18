@@ -1,5 +1,5 @@
 -- categories table seeds here (Example)
-INSERT INTO categories (name) VALUES ('to_watch');
-INSERT INTO categories (name) VALUES ('to_eat');
-INSERT INTO categories (name) VALUES ('to_read');
-INSERT INTO categories (name) VALUES ('to_buy');
+INSERT INTO categories (name) VALUES ('To Watch');
+INSERT INTO categories (name) VALUES ('To Eat');
+INSERT INTO categories (name) VALUES ('To Read');
+INSERT INTO categories (name) VALUES ('To Buy');
