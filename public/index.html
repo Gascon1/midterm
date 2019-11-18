@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="/styles/h1.css" type="text/css" />
   <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
   <link rel="stylesheet" href="/styles/categories.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/registration.css" type="text/css" />
   <link rel="stylesheet" href="/styles/media.css" type="text/css" />
 
 
@@ -35,11 +36,31 @@
       <span id="logo">Smarter<sup>+</sup></span>
       <div>
         <button id="profile" class="main-buttons">Profile</button>
-        <button id="profile" class="main-buttons">Logout</button>
+        <button id="login" class="main-buttons">Logout</button>
       </div>
     </div>
     <textarea wrap="off" id="add-item" name="text" placeholder="Add an item to your smartlist..."></textarea>
   </nav>
+  <section id="standalone" class="category">
+    <header>
+      Create a new account
+    </header>
+    <form method="POST" action="/register">
+      <div class="registration">
+        <label for="SmarterName">Name</label>
+        <input id="SmarterName" class="form-control" type="text" name="name" placeholder="Name">
+      </div>
+      <div class="registration">
+        <label for="tinyAppEmail">Email address</label>
+        <input id="tinyAppEmail" class="form-control" type="email" name="email" placeholder="Enter email">
+      </div>
+      <div class="registration">
+        <label for="tinyAppPassword">Password</label>
+        <input id="tinyAppPassword" class="form-control" type="password" name="password" placeholder="Password">
+      </div>
+      <button class="registration main-buttons" type="submit">Register</button>
+    </form>
+  </section>
   <main>
     <section class="category">
       <header class="category-header">

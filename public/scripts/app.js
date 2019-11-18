@@ -22,6 +22,14 @@ $(document).ready(function () {
 
   });
 
+  const $register = $('#profile');
 
+  $register.on('click', function () {
+    $('main').slideToggle(700, function () {
+
+      $('#standalone').slideToggle(700);
+    });
+
+  })
 
 });
