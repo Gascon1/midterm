@@ -15,8 +15,8 @@ module.exports = (db) => {
     FROM todo_items
     JOIN categories ON categories.id = category_id`)
       .then(data => {
-        console.log(data.rows)
-        console.log(data)
+        // console.log(data.rows)
+        // console.log(data)
         const todo_items = data.rows;
         res.json({ todo_items });
       })
@@ -28,7 +28,7 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    console.log(req.body.text)
+    // console.log(req.body.text)
     const encodedUserInput = encodeURI(req.body.text);
     const AppId = "YJ5XA9-EUGVJUHHHH";
     const URL = `http://api.wolframalpha.com/v2/query?input=${encodedUserInput}&output=json&appid=${AppId}`;
@@ -36,25 +36,28 @@ module.exports = (db) => {
 
     request(URL, (a, b, c) => findCategory(a, b, c, function (myTodoItems) {
 
-      console.log(myTodoItems)
-      const query = {
-        text: `INSERT INTO todo_items (name, category, user_id)
-          VALUES ($1, $2, $3)`,
-        value: [req.body.text, myTodoItems[0]]
-      };
+      // console.log(myTodoItems)
+      for (const item of myTodoItems) {
 
-      db.query(query)
-        .then(data => {
-          console.log(data.rows)
-          console.log(data)
-          const todo_items = data.rows;
-          res.json({ todo_items });
-        })
-        .catch(err => {
-          res
-            .status(500)
-            .json({ error: err.message });
-        });
+        const query = {
+          text: `INSERT INTO todo_items (name, category_id, user_id)
+          VALUES ($1, $2, $3)`,
+          values: [req.body.text, item.category, item.user_id]
+        };
+
+        db.query(query)
+          .then(data => {
+            // console.log(data.rows)
+            // console.log(data)
+            const todo_items = data.rows;
+            res.json({ todo_items });
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .json({ error: err.message });
+          });
+      }
     }))
 
     // console.log(request(URL, findCategory))

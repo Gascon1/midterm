@@ -12,7 +12,7 @@ const findCategory = function (error, response, body, callback) {
     if (lowerBody.includes("book")) {
       let todoItem = {};
       // todoItem.name = parsedBody.queryresult.assumptions.word
-      todoItem.category = 'To Read'
+      todoItem.category = 3
       todoItem.user_id = 1
 
       myTodoItems.push(todoItem)
@@ -20,7 +20,7 @@ const findCategory = function (error, response, body, callback) {
     if (lowerBody.includes("movie" || "television")) {
       let todoItem = {};
       // todoItem.name = parsedBody.queryresult.assumptions.word
-      todoItem.category = 'To Watch'
+      todoItem.category = 1
       todoItem.user_id = 1
 
       myTodoItems.push(todoItem)
@@ -28,7 +28,7 @@ const findCategory = function (error, response, body, callback) {
     if (lowerBody.includes("product")) {
       let todoItem = {};
       // todoItem.name = parsedBody.queryresult.assumptions.word
-      todoItem.category = 'To Buy'
+      todoItem.category = 4
       todoItem.user_id = 1
 
       myTodoItems.push(todoItem)
@@ -36,24 +36,14 @@ const findCategory = function (error, response, body, callback) {
     if (lowerBody.includes("restaurant")) {
       let todoItem = {};
       // todoItem.name = parsedBody.queryresult.assumptions.word
-      todoItem.category = 'To Eat'
+      todoItem.category = 2
       todoItem.user_id = 1
 
       myTodoItems.push(todoItem)
     }
   }
-  // console.log('THIS IS THE BODY', body)
-  // console.log(myTodoItems)
-  // console.log(body['queryresult'])
   callback(myTodoItems);
 
 }
-// const encodedUserInput = encodeURI(userInput);
-// const encodedUserInput = encodeURI("harry potter");
-// const AppId = "YJ5XA9-EUGVJUHHHH";
-// const URL = `http://api.wolframalpha.com/v2/query?input=${encodedUserInput}&output=json&appid=${AppId}`;
-
-
-// request(URL, findCategory)
 
 module.exports = findCategory;
