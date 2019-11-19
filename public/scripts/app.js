@@ -15,20 +15,16 @@ const createListItem = function (todo_item) {
   let $div = $('<div>')
   let $bulletIcon = $('<i>').addClass('far fa-circle custom-bullets');
   let $span = $('<span>').text(todo_item.name)
-  // console.log("THIS is the TODO object",todo_item)
-  // console.log("THIS is the todo item name property",todo_item.name)
   let $settingsIcon = $('<i>').addClass('fas fa-ellipsis-v more-settings');
 
 
   $div.append($bulletIcon).append($span).append($settingsIcon)
   $listItem.append($div)
-  // console.log("THIS IS THE LIST ITEM",$listItem)
   return $listItem
 }
 
 // create category unorder list element in html
 const createUnorderedListElement = function (todo_items_arr) {
-  console.log("TO DO ITEMS ARRAY", todo_items_arr)
   const todo_items = todo_items_arr
   let $categoryUnorderedList = $('<ul>').addClass('category-items')
   for (const todo_item of todo_items) {
@@ -51,13 +47,11 @@ const createCategory = function (category) {
   let $categoryUnorderedList = createUnorderedListElement(category)
   $category.append($categoryUnorderedList)
 
-  console.log("this i CATEGORY", $category)
   return $category
 }
 
 // render all categories
 const renderCategories = function (todo_items_by_categories_obj) {
-// console.log("TODO ITEMS BY CATEGORIES OBJ", todo_items_by_categories_obj)
   for (const category in todo_items_by_categories_obj) {
     $("main").append(createCategory(todo_items_by_categories_obj[category]))
 
@@ -76,7 +70,6 @@ const loadCategories = function () {
     method: "GET"
   })
     .then(function (database) {
-      console.log("THIS IS THE DATABASE IN THE APP.JS",database)
       renderCategories(database);
     });
 };
