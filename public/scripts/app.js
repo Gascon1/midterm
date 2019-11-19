@@ -98,11 +98,22 @@ $(document).ready(function () {
 
   // toggles the checkmark of the todo item once it is clicked on (completed)
 
+<<<<<<< HEAD
   $("main").on("click", "div", function () {
     console.log($(this))
+=======
+  $("main").on("click","div", function(){
+>>>>>>> abcd9aeb24065ce2daf091c7695811fe6e0da405
     $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
     $(this).children("span").toggleClass("line-through")
   })
+
+  // toggles the lightbox once more setting icons is clicked
+  $("main").on("click","li.more-settings", function(){
+    console.log($(this))
+
+  })
+
 
 
 
