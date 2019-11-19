@@ -9,8 +9,8 @@ const createListItem = function (todo_item) {
   let $settingsIcon = $('<i>').addClass('fas fa-ellipsis-v more-settings');
 
 
-  $div.append($bulletIcon).append($span).append($settingsIcon)
-  $listItem.append($div)
+  $div.append($bulletIcon).append($span)
+  $listItem.append($div).append($settingsIcon)
   return $listItem
 }
 
@@ -87,16 +87,27 @@ const loadCategories = function () {
 $(document).ready(function () {
   loadCategories()
 
-  const $categoryToggle = $(".category-header");
-  $("main").on("click", $("this").children("section").children("header"), function () {
-    console.log("this is THIS", $(this).children("section").find(".fa-caret-down"))
+  // togles the category icon and ul list associated to the category
+  $("main").on("click", "header", function () {
+    console.log($(this))
     //Toggles the display of category icon
-    $(this).children("section").find(".fa-caret-down").toggleClass("open")
+    $(this).children(".fa-caret-down").toggleClass("open")
     //Toggles the display of category items box
-    $(this).children("section").children(".category-items").slideToggle(400);
+    $(this).siblings(".category-items").slideToggle(700);
     event.stopPropagation()
   });
 
+  // toggles the checkmark of the todo item once it is clicked on (completed)
+
+  $("main").on("click","div", function(){
+    console.log($(this))
+    $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
+    $(this).children("span").toggleClass("line-through")
+  } )
+
+
+
+//
   const $register = $('#profile');
 
   $register.on('click', function () {
