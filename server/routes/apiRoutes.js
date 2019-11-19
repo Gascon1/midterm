@@ -41,9 +41,22 @@ const findCategory = function (error, response, body, callback) {
 
       myTodoItems.push(todoItem)
     }
+
+
+  } else {
+    let todoItem = {};
+
+    todoItem.category = 5;
+    todoItem.user_id = 1;
+
+    myTodoItems.push(todoItem)
   }
+
   callback(myTodoItems);
 
 }
+
+
+
 
 module.exports = findCategory;

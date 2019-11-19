@@ -36,7 +36,7 @@ module.exports = (db) => {
 
     request(URL, (a, b, c) => findCategory(a, b, c, function (myTodoItems) {
 
-      // console.log(myTodoItems)
+      console.log(c)
       for (const item of myTodoItems) {
 
         const query = {
