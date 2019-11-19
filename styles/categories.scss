@@ -9,12 +9,12 @@ section.category {
 header {
   font-style: normal;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.5em;
   line-height: 0.75em;
   display: flex;
   align-items: center;
-  padding: 10px 5px;
-  margin: 0 5px 5px;
+  // padding: 10px 5px;
+  padding: 1rem;
 
 
   .fa-caret-down {
@@ -40,6 +40,7 @@ ul {
   display: flex;
   margin: 0;
   padding: 0;
+  padding-top: 0.5em;
   list-style-type: none;
   flex-direction: column;
   align-content: center;
@@ -48,7 +49,7 @@ ul {
 }
 
 .custom-bullets {
-  font-size: 0.7em;
+  font-size: 0.8em;
   vertical-align: middle;
   align-content: inherit;
   padding: 0 0.5em 0.25em 1.2em;
