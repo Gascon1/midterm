@@ -105,6 +105,10 @@ $(document).ready(function () {
     $(this).children("span").toggleClass("line-through")
   } )
 
+  // toggles the lightbox once more setting icons is clicked
+  $("main").on("click",".more-settings", function(){})
+
+
 
 
 //

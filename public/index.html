@@ -29,6 +29,8 @@
 </head>
 
 <body>
+  <div id="lightbox">
+  </div>
   <nav>
     <div class="container-flex">
       <span id="logo">Smarter<sup>+</sup></span>
@@ -37,7 +39,7 @@
         <button id="login" class="main-buttons">Login</button>
       </div>
     </div>
-    <form id='new-todo-item' method="POST" action="/db/todo_items">
+    <form method="POST" action="/new">
       <textarea wrap="off" id="add-item" name="text" placeholder="Add an item to your smartlist..."></textarea>
     </form>
   </nav>
