@@ -25,8 +25,6 @@
   <link rel="stylesheet" href="/styles/registration.css" type="text/css" />
   <link rel="stylesheet" href="/styles/media.css" type="text/css" />
 
-
-
   <title>Smarter</title>
 </head>
 
@@ -35,15 +33,16 @@
     <div class="container-flex">
       <span id="logo">Smarter<sup>+</sup></span>
       <div>
-        <button id="profile" class="main-buttons">Profile</button>
-        <button id="login" class="main-buttons">Logout</button>
+        <button id="profile" class="main-buttons">Register</button>
+        <button id="login" class="main-buttons">Login</button>
       </div>
     </div>
     <form method="POST" action="/new">
       <textarea wrap="off" id="add-item" name="text" placeholder="Add an item to your smartlist..."></textarea>
     </form>
   </nav>
-  <section id="standalone" class="category">
+
+  <section id="create-account" class="category">
     <header>
       Create a new account
     </header>
@@ -63,15 +62,11 @@
       <button class="registration main-buttons" type="submit">Register</button>
     </form>
   </section>
-  <section id="standalone" class="category">
+  <section id="login-account" class="category">
     <header>
       Log into your account
     </header>
     <form method="POST" action="/login">
-      <div class="registration">
-        <label for="SmarterName">Name</label>
-        <input id="SmarterName" class="form-control" type="text" name="name" placeholder="Name">
-      </div>
       <div class="registration">
         <label for="tinyAppEmail">Email address</label>
         <input id="tinyAppEmail" class="form-control" type="email" name="email" placeholder="Enter email">
@@ -84,6 +79,94 @@
     </form>
   </section>
   <main>
+    <section class="category">
+      <header class="category-header">
+        <i class="fas fa-caret-down"></i>
+        Movies
+      </header>
+      <ul class="category-items">
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Joker</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Arrival</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Bohemian Rapsody</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>The Avatar</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Batman</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Avengers: Endgame</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>The Hangover</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Arrival</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Bohemian Rapsody</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+      </ul>
+    </section>
+    <section class="category">
+      <header class="category-header">
+        <i class="fas fa-caret-down"></i>
+        Movies
+      </header>
+      <ul class="category-items">
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Joker</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Arrival</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Bohemian Rapsody</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>The Avatar</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Batman</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Avengers: Endgame</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>The Hangover</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Arrival</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+        <li>
+          <div><i class="far fa-circle custom-bullets"></i><span>Bohemian Rapsody</span></div><i
+            class="fas fa-ellipsis-v more-settings"></i>
+        </li>
+      </ul>
+    </section>
     <section class="category">
       <header class="category-header">
         <i class="fas fa-caret-down"></i>

@@ -26,13 +26,38 @@ $(document).ready(function () {
 
   $register.on('click', function () {
 
-    if ($('#standalone').css('display') === 'none') {
-      $('main').slideToggle(700, function () {
-        $('#standalone').slideToggle(700);
+    if ($('#create-account').css('display') === 'none') {
+      $('main').slideUp(700, function () {
+        $('#login-account').slideUp(700, function () {
+          $('#create-account').slideDown(700)
+        });
       });
     } else {
-      $('#standalone').slideToggle(700, function () {
-        $('main').slideToggle(700)
+      $('#create-account').slideUp(700, function () {
+        $('#login-account').slideUp(700);
+        $('main').slideDown(700)
+      });
+    }
+  })
+
+  const $login = $('#login');
+
+  $login.on('click', function () {
+
+    if ($('#login-account').css('display') === 'none') {
+      $('main').slideUp(700, function () {
+        $('#create-account').slideUp(700, function () {
+          $('#login-account').slideDown(700)
+
+        });
+
+      });
+    } else {
+      $('#login-account').slideUp(700, function () {
+        $('main').slideDown(700, function () {
+          $('#create-account').slideUp(700);
+        })
+
       });
     }
   })
