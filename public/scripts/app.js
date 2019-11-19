@@ -117,9 +117,9 @@ $(document).ready(function () {
     $("#more-options").toggleClass("none")
   })
 
-//  $("#more-options").on("click",function (){
-//   event.stopPropagation()
-//  })
+ $("#more-options").on("click",function (){
+  event.stopPropagation()
+ })
 
 
   //
