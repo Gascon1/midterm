@@ -18,8 +18,8 @@ const createListItem = function (todo_item) {
   let $settingsIcon = $('<i>').addClass('fas fa-ellipsis-v more-settings');
 
 
-  $div.append($bulletIcon).append($span).append($settingsIcon)
-  $listItem.append($div)
+  $div.append($bulletIcon).append($span)
+  $listItem.append($div).append($settingsIcon)
   return $listItem
 }
 
