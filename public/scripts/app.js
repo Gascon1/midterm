@@ -79,11 +79,13 @@ $(document).ready(function () {
   loadCategories()
 
   const $categoryToggle = $(".category-header");
-  $categoryToggle.on("click", function () {
+  $("main").on("click", $("this").children("section").children("header"), function () {
+    console.log("this is THIS", $(this).children("section").find(".fa-caret-down"))
     //Toggles the display of category icon
-    $(this).children("i").toggleClass("open")
+    $(this).children("section").find(".fa-caret-down").toggleClass("open")
     //Toggles the display of category items box
-    $(this).siblings(".category-items").slideToggle(700);
+    $(this).children("section").children(".category-items").slideToggle(700);
+    event.stopPropagation()
   });
 
   const $register = $('#profile');
