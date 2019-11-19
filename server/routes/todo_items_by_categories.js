@@ -22,11 +22,7 @@ module.exports = (db) => {
             const todo_items = data.rows;
             const myCategories = {}
             for (const todo_item of todo_items){
-              console.log("THIS IS THE TODO_ITEM", todo_item)
-              console.log("THIS IS THE ARRAY OF KEYS INSIDE myCategories",Object.keys(myCategories))
-              console.log("THIS IS THE MYCATEGORIES OBJECT", myCategories)
              if (Object.keys(myCategories).indexOf(todo_item.category) < 0 ) {
-               console.log("IM INSIDE THE IF")
                myCategories[todo_item.category] = []
                myCategories[todo_item.category].push(todo_item)
              } else {
