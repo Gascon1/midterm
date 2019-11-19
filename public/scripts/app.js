@@ -78,16 +78,26 @@ const loadCategories = function () {
 $(document).ready(function () {
   loadCategories()
 
-  const $categoryToggle = $(".category-header");
-  $("main").on("click", $("this").children("section").children("header"), function () {
-    console.log("this is THIS", $(this).children("section").find(".fa-caret-down"))
-    //Toggles the display of category icon
-    $(this).children("section").find(".fa-caret-down").toggleClass("open")
-    //Toggles the display of category items box
-    $(this).children("section").children(".category-items").slideToggle(700);
-    event.stopPropagation()
-  });
+  // togles the category icon and ul list associated to the category
+  // const $categoryToggle = $(".category-header");
+  // $("main").on("click", $("this").children("section").children("header"), function () {
+  //   //Toggles the display of category icon
+  //   $(this).children("section").find(".fa-caret-down").toggleClass("open")
+  //   //Toggles the display of category items box
+  //   $(this).children("section").children(".category-items").slideToggle(700);
+  //   event.stopPropagation()
+  // });
 
+  // toggles the checkmark of the todo item once it is clicked on (completed)
+  const $todoCheckmark = $(".custom-bullets");
+  $todoCheckmark.on("click", function(){
+    $(this).toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
+    $(this).siblings("span").toggleClass("line-through")
+  } )
+
+
+
+//
   const $register = $('#profile');
 
   $register.on('click', function () {
