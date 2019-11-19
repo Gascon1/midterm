@@ -43,6 +43,7 @@ const createCategory = function (category) {
 
 // render all categories
 const renderCategories = function (todo_items_by_categories_obj) {
+  $("main").empty();
   for (const category in todo_items_by_categories_obj) {
     $("main").append(createCategory(todo_items_by_categories_obj[category]))
 
@@ -66,25 +67,23 @@ const loadCategories = function () {
 };
 
 
-
-
-
-
-// const $form = $('#new-todo-item')
-// $form.on('submit', function (event) {
-//   event.preventDefault();
-//   $.ajax({
-//     url: "http://localhost:8080/db/todo_items",
-//     method: 'POST',
-//     data: $(this).serialize()
-//   })
-// })
-
-
-
-
-
 $(document).ready(function () {
+
+  const $form = $('#new-todo-item')
+  $form.on('submit', function (event) {
+    event.preventDefault();
+    $.ajax({
+      url: "http://localhost:8080/db/todo_items",
+      method: 'POST',
+      data: $(this).serialize()
+    })
+      .done(function () {
+        loadCategories();
+      })
+  })
+
+
+
   loadCategories()
 
   // togles the category icon and ul list associated to the category
@@ -99,15 +98,15 @@ $(document).ready(function () {
 
   // toggles the checkmark of the todo item once it is clicked on (completed)
 
-  $("main").on("click","div", function(){
+  $("main").on("click", "div", function () {
     console.log($(this))
     $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
     $(this).children("span").toggleClass("line-through")
-  } )
+  })
 
 
 
-//
+  //
   const $register = $('#profile');
 
   $register.on('click', function () {
@@ -148,11 +147,11 @@ $(document).ready(function () {
     }
   })
 
-  $('#add-item').keypress(function (e) {
-    if (e.keyCode == 13 && !e.shiftKey) {
-      e.preventDefault();
-      this.form.submit();
-    }
-  });
+  // $('#add-item').keypress(function (e) {
+  //   if (e.keyCode == 13 && !e.shiftKey) {
+  //     // e.preventDefault();
+  //     // this.form.submit();
+  //   }
+  // });
 
 });

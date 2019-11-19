@@ -48,7 +48,7 @@ module.exports = (db) => {
         db.query(query)
           .then(data => {
             // console.log(data.rows)
-            // console.log(data)
+            console.log(data)
             const todo_items = data.rows;
             res.json({ todo_items });
           })
