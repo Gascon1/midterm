@@ -99,21 +99,31 @@ $(document).ready(function () {
 
   // toggles the checkmark of the todo item once it is clicked on (completed)
 
-  $("main").on("click","div", function(){
+  $("main").on("click", "div", function () {
     $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
     $(this).children("span").toggleClass("line-through")
-  } )
+  })
 
   // toggles the lightbox once more setting icons is clicked
-  $("main").on("click","li.more-settings", function(){
+  $("main").on("click", "li .more-settings", function () {
     console.log($(this))
+    $("#lightbox").toggleClass("lightbox")
+    $("#more-options").toggleClass("none")
 
   })
 
+  $("#lightbox").on("click", function () {
+    console.log($(this))
+    $("#lightbox").toggleClass("lightbox")
+    $("#more-options").toggleClass("none")
+  })
+
+//  $("#more-options").on("click",function (){
+//   event.stopPropagation()
+//  })
 
 
-
-//
+  //
   const $register = $('#profile');
 
   $register.on('click', function () {
