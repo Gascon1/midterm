@@ -4,8 +4,9 @@
  *   these routes are mounted onto /todo_items
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-
+const request = require("request");
 const express = require('express');
+const findCategory = require('./apiRoutes')
 const router = express.Router();
 
 module.exports = (db) => {
@@ -25,31 +26,44 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
-  return router;
-};
 
-
-module.exports = (db) => {
   router.post("/", (req, res) => {
+    console.log(req.body.text)
+    const encodedUserInput = encodeURI(req.body.text);
+    const AppId = "YJ5XA9-EUGVJUHHHH";
+    const URL = `http://api.wolframalpha.com/v2/query?input=${encodedUserInput}&output=json&appid=${AppId}`;
 
-    const query = {
-      text: `INSERT INTO todo_items (name, category, user_id)
-            VALUES ($1, $2, $3)`,
-      value: []
-    };
 
-    db.query(query)
-      .then(data => {
-        console.log(data.rows)
-        console.log(data)
-        const todo_items = data.rows;
-        res.json({ todo_items });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    request(URL, (a, b, c) => findCategory(a, b, c, function (myTodoItems) {
+
+      console.log(myTodoItems)
+      const query = {
+        text: `INSERT INTO todo_items (name, category, user_id)
+          VALUES ($1, $2, $3)`,
+        value: [req.body.text, myTodoItems[0]]
+      };
+
+      db.query(query)
+        .then(data => {
+          console.log(data.rows)
+          console.log(data)
+          const todo_items = data.rows;
+          res.json({ todo_items });
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    }))
+
+    // console.log(request(URL, findCategory))
+
   });
+
   return router;
 };
+
+
+
+

@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS todo_items CASCADE;
 CREATE TABLE todo_items (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  is_completed BOOLEAN,
+  is_completed BOOLEAN NOT NULL DEFAULT FALSE,
   category_id INTEGER REFERENCES categories(id),
   user_id INTEGER REFERENCES users(id)
 );

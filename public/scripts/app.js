@@ -1,13 +1,4 @@
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users.users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
-// });
+
 
 // create category list item element in html
 const createListItem = function (todo_item) {
@@ -73,6 +64,24 @@ const loadCategories = function () {
       renderCategories(database);
     });
 };
+
+
+
+
+
+
+// const $form = $('#new-todo-item')
+// $form.on('submit', function (event) {
+//   event.preventDefault();
+//   $.ajax({
+//     url: "http://localhost:8080/db/todo_items",
+//     method: 'POST',
+//     data: $(this).serialize()
+//   })
+// })
+
+
+
 
 
 $(document).ready(function () {
