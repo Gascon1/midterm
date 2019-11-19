@@ -84,7 +84,7 @@ $(document).ready(function () {
     //Toggles the display of category icon
     $(this).children("section").find(".fa-caret-down").toggleClass("open")
     //Toggles the display of category items box
-    $(this).children("section").children(".category-items").slideToggle(700);
+    $(this).children("section").children(".category-items").slideToggle(400);
     event.stopPropagation()
   });
 
@@ -93,15 +93,15 @@ $(document).ready(function () {
   $register.on('click', function () {
 
     if ($('#create-account').css('display') === 'none') {
-      $('main').slideUp(700, function () {
-        $('#login-account').slideUp(700, function () {
-          $('#create-account').slideDown(700)
+      $('main').slideUp(400, function () {
+        $('#login-account').slideUp(400, function () {
+          $('#create-account').slideDown(400)
         });
       });
     } else {
-      $('#create-account').slideUp(700, function () {
-        $('#login-account').slideUp(700);
-        $('main').slideDown(700)
+      $('#create-account').slideUp(400, function () {
+        $('#login-account').slideUp(400);
+        $('main').slideDown(400)
       });
     }
   })
@@ -111,17 +111,17 @@ $(document).ready(function () {
   $login.on('click', function () {
 
     if ($('#login-account').css('display') === 'none') {
-      $('main').slideUp(700, function () {
-        $('#create-account').slideUp(700, function () {
-          $('#login-account').slideDown(700)
+      $('main').slideUp(400, function () {
+        $('#create-account').slideUp(400, function () {
+          $('#login-account').slideDown(400)
 
         });
 
       });
     } else {
-      $('#login-account').slideUp(700, function () {
-        $('main').slideDown(700, function () {
-          $('#create-account').slideUp(700);
+      $('#login-account').slideUp(400, function () {
+        $('main').slideDown(400, function () {
+          $('#create-account').slideUp(400);
         })
 
       });

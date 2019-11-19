@@ -27,3 +27,29 @@ module.exports = (db) => {
   });
   return router;
 };
+
+
+module.exports = (db) => {
+  router.post("/", (req, res) => {
+
+    const query = {
+      text: `INSERT INTO todo_items (name, category, user_id)
+            VALUES ($1, $2, $3)`,
+      value: []
+    };
+
+    db.query(query)
+      .then(data => {
+        console.log(data.rows)
+        console.log(data)
+        const todo_items = data.rows;
+        res.json({ todo_items });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+  return router;
+};
