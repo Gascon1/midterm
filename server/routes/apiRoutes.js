@@ -33,7 +33,7 @@ const findCategory = function (error, response, body, callback) {
 
       myTodoItems.push(todoItem)
     }
-    if (lowerBody.includes("restaurant" || 'food')) {
+    if (lowerBody.includes('ExpandedFood')) {
       let todoItem = {};
       // todoItem.name = parsedBody.queryresult.assumptions.word
       todoItem.category = 2
