@@ -99,7 +99,8 @@ $(document).ready(function () {
   // toggles the checkmark of the todo item once it is clicked on (completed)
 
   $("main").on("click", "div", function () {
-    $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
+    $(this).children("i .custom-bullets").toggleClass("fas fa-check-circle")
+    $(this).children("i .custom-bullets").toggleClass("far fa-circle")
     $(this).children("span").toggleClass("line-through")
   })
 
@@ -113,9 +114,9 @@ $(document).ready(function () {
 
   // turns off the lightbox once the lightbox is clicked
   $("#lightbox").on("click", function (event) {
-    if(event.target.id === "lightbox"){
-    $("#lightbox").toggleClass("lightbox")
-    $("#more-options").toggleClass("none")
+    if (event.target.id === "lightbox") {
+      $("#lightbox").toggleClass("lightbox")
+      $("#more-options").toggleClass("none")
     }
   })
 
@@ -129,9 +130,9 @@ $(document).ready(function () {
     event.stopPropagation()
   });
 
-   // toggles the checkmark of the category once it is clicked on (completed) in the more-options box
+  // toggles the checkmark of the category once it is clicked on (completed) in the more-options box
 
-   $("body").on("click", "div", function () {
+  $("body").on("click", "div", function () {
     $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
   })
 
