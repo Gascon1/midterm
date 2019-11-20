@@ -74,8 +74,10 @@
     <div class="container-flex">
       <span id="logo">Smarter<sup>+</sup></span>
       <div>
-        <button id="profile" class="main-buttons">Register</button>
+        <button id="register" class="main-buttons">Register</button>
         <button id="login" class="main-buttons">Login</button>
+        <button id="profile" class="main-buttons">Profile</button>
+        <button id="logout" class="main-buttons">Logout</button>
       </div>
     </div>
     <form id='new-todo-item' method="POST" action="/db/todo_items">
@@ -90,7 +92,7 @@
     <header>
       Create a new account
     </header>
-    <form method="POST" action="/register">
+    <form id="registration-form" method="POST" action="/db/users">
       <div class="registration">
         <label for="SmarterName">Name</label>
         <input id="SmarterName" class="form-control" type="text" name="name" placeholder="Name">
@@ -110,7 +112,7 @@
     <header>
       Log into your account
     </header>
-    <form method="POST" action="/login">
+    <form method="GET" action="/login">
       <div class="registration">
         <label for="SmarterEmailLogin">Email address</label>
         <input id="SmarterEmailLogin" class="form-control" type="email" name="email" placeholder="Enter email">
@@ -120,6 +122,22 @@
         <input id="SmarterPasswordLogin" class="form-control" type="password" name="password" placeholder="Password">
       </div>
       <button class="registration main-buttons" type="submit">Login</button>
+    </form>
+  </section>
+  <section id="edit-account" class="category">
+    <header>
+      Update your profile
+    </header>
+    <form method="GET" action="/login">
+      <div class="registration">
+        <label for="SmarterEmailLogin">New email address</label>
+        <input id="SmarterEmailLogin" class="form-control" type="email" name="email" placeholder="Enter email">
+      </div>
+      <div class="registration">
+        <label for="SmarterPasswordLogin">New password</label>
+        <input id="SmarterPasswordLogin" class="form-control" type="password" name="password" placeholder="Password">
+      </div>
+      <button class="registration main-buttons" type="submit">Update</button>
     </form>
   </section>
   <main>

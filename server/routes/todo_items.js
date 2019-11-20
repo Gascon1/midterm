@@ -6,7 +6,7 @@
  */
 const request = require("request");
 const express = require('express');
-const findCategory = require('./apiRoutes')
+const findCategory = require('../helpers/findCategory')
 const router = express.Router();
 
 module.exports = (db) => {
@@ -48,7 +48,7 @@ module.exports = (db) => {
         db.query(query)
           .then(data => {
             // console.log(data.rows)
-            console.log(data)
+            // console.log(data)
             const todo_items = data.rows;
             res.json({ todo_items });
           })

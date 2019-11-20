@@ -82,9 +82,12 @@ $(document).ready(function () {
       })
   })
 
-
-
+  //loading categories when the page is ready if the user has already populated the database
   loadCategories()
+
+
+
+
 
   // togles the category icon and ul list associated to the category
   $("main").on("click", "header", function () {
@@ -137,23 +140,53 @@ $(document).ready(function () {
   })
 
   //
-  const $register = $('#profile');
+  const $register = $('#register');
 
   $register.on('click', function () {
 
     if ($('#create-account').css('display') === 'none') {
       $('main').slideUp(400, function () {
         $('#login-account').slideUp(400, function () {
-          $('#create-account').slideDown(400)
+          $('#edit-account').slideUp(400, function () {
+
+            $('#create-account').slideDown(400)
+          })
         });
       });
     } else {
       $('#create-account').slideUp(400, function () {
         $('#login-account').slideUp(400);
+        $('#edit-account').slideUp(400)
         $('main').slideDown(400)
       });
     }
   })
+
+  //
+  const $profile = $('#profile');
+
+  $profile.on('click', function () {
+
+    if ($('#edit-account').css('display') === 'none') {
+      $('main').slideUp(400, function () {
+        $('#login-account').slideUp(400, function () {
+          $('#create-account').slideUp(400, function () {
+
+            $('#edit-account').slideDown(400)
+          })
+
+        });
+      });
+    } else {
+      $('#edit-account').slideUp(400, function () {
+        $('#create-account').slideUp(400, function () {
+          $('#login-account').slideUp(400);
+          $('main').slideDown(400)
+        });
+      });
+
+    }
+  });
 
   const $login = $('#login');
 
@@ -162,7 +195,11 @@ $(document).ready(function () {
     if ($('#login-account').css('display') === 'none') {
       $('main').slideUp(400, function () {
         $('#create-account').slideUp(400, function () {
-          $('#login-account').slideDown(400)
+          $('#edit-account').slideUp(400, function () {
+
+            $('#login-account').slideDown(400)
+          })
+
 
         });
 
@@ -170,6 +207,7 @@ $(document).ready(function () {
     } else {
       $('#login-account').slideUp(400, function () {
         $('main').slideDown(400, function () {
+          $('#edit-account').slideUp(400)
           $('#create-account').slideUp(400);
         })
 
@@ -177,11 +215,24 @@ $(document).ready(function () {
     }
   })
 
-  // $('#add-item').keypress(function (e) {
-  //   if (e.keyCode == 13 && !e.shiftKey) {
-  //     // e.preventDefault();
-  //     // this.form.submit();
-  //   }
-  // });
 
+});
+
+$(document).ready(function () {
+
+  const $form = $('#registration-form')
+  $form.on('submit', function (event) {
+    event.preventDefault();
+    $.ajax({
+      url: "http://localhost:8080/db/users",
+      method: 'POST',
+      data: $(this).serialize()
+    })
+      .done(function () {
+        $('#create-account').slideUp(400, function () {
+          $('main').slideDown(400);
+        })
+        loadCategories();
+      })
+  })
 });
