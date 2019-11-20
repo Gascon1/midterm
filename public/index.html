@@ -79,8 +79,10 @@
       </div>
     </div>
     <form id='new-todo-item' method="POST" action="/db/todo_items">
-      <!-- <textarea wrap="off" id="add-item" name="text" placeholder="Add an item to your smartlist..."></textarea> -->
-      <input type="text" id="add-item" name="text" placeholder="Add an item to your smartlist...">
+      <div id="input-box">
+        <input type="text" id="add-item" name="text" placeholder="Add an item to your smartlist...">
+        <button id="post-button"><i class="fas fa-plus"></i></button>
+      </div>
     </form>
   </nav>
 
