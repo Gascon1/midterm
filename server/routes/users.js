@@ -11,7 +11,7 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.post("/login", (req, res) => {
-    console.log('THIS IS REQ.body', req.body)
+    // console.log('THIS IS REQ.body', req.body)
     const query = {
       text: `SELECT * FROM users
               WHERE users.email = $1
@@ -21,7 +21,7 @@ module.exports = (db) => {
 
     db.query(query)
       .then(data => {
-        console.log(data.rows[0])
+        // console.log(data.rows[0])
         res.json(data.rows[0]);
       })
       .catch(err => {
@@ -29,6 +29,61 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
+  });
+
+  router.put("/:id", (req, res) => {
+    console.log(req.params)
+    // console.log('THIS IS REQ.body', req.body)
+
+
+    if (req.body.password === "" && req.body.email === "") {
+      console.log('this isnt doing a query')
+      db.catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+
+    } else if (req.body.email === "") {
+      const query = {
+        text: `UPDATE users SET password = $1 WHERE id = $2`,
+        values: [req.body.password, req.params.id]
+      }
+      db.query(query)
+        .then(data => {
+          // console.log(data.rows[0])
+          res.json(data.rows[0]);
+        })
+
+    } else if (req.body.password === "") {
+
+      const query = {
+        text: `UPDATE users SET email = $1 WHERE id = $2`,
+        values: [req.body.email, req.params.id]
+      }
+      db.query(query)
+        .then(data => {
+          // console.log(data.rows[0])
+          res.json(data.rows[0]);
+        })
+
+    } else {
+
+      const query = {
+        text: `UPDATE users SET email $1, password = $2 WHERE id = $3`,
+        values: [req.body.email, req.body.password, req.params.id]
+      }
+      db.query(query)
+        .then(data => {
+          // console.log(data.rows[0])
+          res.json(data.rows[0]);
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    }
   });
 
 
@@ -51,7 +106,7 @@ module.exports = (db) => {
       text: `INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`,
       values: [req.body.name, req.body.email, req.body.password]
     }
-    console.log(req.body)
+    // console.log(req.body)
     db.query(query)
       .then(data => {
         const users = data.rows;

@@ -270,6 +270,33 @@ $(document).ready(function () {
   })
 });
 
+
+$(document).ready(function () {
+
+  const $form = $('#update-form')
+  $form.on('submit', function (event) {
+    event.preventDefault();
+
+    userEmail = encodeURI($(this).serializeArray()[0].value);
+
+    userPassword = encodeURI($(this).serializeArray()[1].value);
+
+    const userID = localStorage.getItem('user')
+
+    console.log('user email :', userEmail, 'user password: ', userPassword);
+    $.ajax({
+      url: `http://localhost:8080/db/users/${userID}`,
+      method: 'PUT',
+      data: $(this).serialize()
+    })
+      .done(function (user) {
+        console.log(user)
+        console.log($(this))
+        loadCategories();
+      })
+  })
+});
+
 $(document).ready(function () {
 
   const $logout = $('#logout')
