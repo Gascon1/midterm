@@ -88,7 +88,6 @@ $(document).ready(function () {
 
   // togles the category icon and ul list associated to the category
   $("main").on("click", "header", function () {
-    console.log($(this))
     //Toggles the display of category icon
     $(this).children(".fa-caret-down").toggleClass("open")
     //Toggles the display of category items box
@@ -106,11 +105,38 @@ $(document).ready(function () {
 
   // turns on the lightbox once more setting icons is clicked
   $("main").on("click", "li .more-settings", function () {
-    console.log($(this))
     $("#lightbox").toggleClass("lightbox")
     $("#more-options").toggleClass("none")
+    $("body div section ul li div i").attr("class","far fa-circle custom-bullets")
 
+    const encoded = encodeURI($(event.target).siblings("div").children("span").text());
+    const decoded = decodeURI(encoded)
+    $.ajax({
+      url: `http://localhost:8080/db/todo_items/${encoded}/categories`,
+      method: "GET"
+    })
+      .then(function (database) {
+        for(const data of database){
+          $(`span:contains(${data.name})`).parent().children("i")
+          .toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
+        }
+      });
   })
+
+  // makes the checkmark appear for all categories that the specific todo item (that was clicked) is part
+  //of
+  $("body").on("click", "header", function (event) {
+   if($(event.target).siblings("#lightbox-ul").attr("class") === ""){
+     console.log("do the GET")
+     $.ajax({
+      url: "http://localhost:8080/db/categories/todo_items",
+      method: "GET"
+    })
+      .then(function (database) {
+        console.log(database);
+      });
+   }
+  });
 
   // turns off the lightbox once the lightbox is clicked
   $("#lightbox").on("click", function (event) {
@@ -120,21 +146,14 @@ $(document).ready(function () {
     }
   })
 
-  // togles the more-options box icon and ul list associated to more-options box
-  $("body").on("click", "header", function () {
-    console.log($(this))
-    //Toggles the display of category icon
-    $(this).children(".fa-caret-down").toggleClass("open")
-    //Toggles the display of category items box
-    $(this).siblings(".category-items").slideToggle(700);
-    event.stopPropagation()
-  });
 
   // toggles the checkmark of the category once it is clicked on (completed) in the more-options box
 
   $("body").on("click", "div", function () {
     $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
   })
+
+
 
   //
   const $register = $('#profile');

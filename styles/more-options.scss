@@ -1,3 +1,18 @@
+#lightbox-ul{
+  display: flex;
+  // display: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 0.5em;
+  list-style-type: none;
+  flex-direction: column;
+  align-content: center;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-color: #2C2B30;
+
+}
+
 #more-options {
   opacity: 1;
   z-index: 999;
