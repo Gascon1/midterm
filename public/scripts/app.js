@@ -1,5 +1,6 @@
 
 
+
 // create category list item element in html
 const createListItem = function (todo_item) {
   let $listItem = $('<li>')
@@ -259,6 +260,10 @@ $(document).ready(function () {
 
         $('#login-account').slideUp(400, function () {
           $('main').slideDown(400);
+          $('#login').slideUp(0);
+          $('#register').slideUp(0);
+          $('#profile').slideDown(0);
+          $('#logout').slideDown(0);
         })
         loadCategories();
       })
@@ -269,9 +274,27 @@ $(document).ready(function () {
 
   const $logout = $('#logout')
   $logout.on('click', function () {
-    localStorage.setItem('user', null)
+    localStorage.clear()
+
+    $('#register').slideDown(0);
+    $('#login').slideDown(0);
+    $('#profile').slideUp(0);
+    $('#logout').slideUp(0);
 
   })
-
 });
 
+$(document).ready(function () {
+
+  if (!localStorage.getItem('user')) {
+    $('#register').slideDown(0);
+    $('#login').slideDown(0);
+    $('#profile').slideUp(0);
+    $('#logout').slideUp(0);
+  } else {
+    $('#register').slideUp(0);
+    $('#login').slideUp(0);
+    $('#profile').slideDown(0);
+    $('#logout').slideDown(0);
+  }
+});
