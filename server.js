@@ -51,7 +51,7 @@ const usersRoutes = require("./server/routes/users");
 const categoriesRoutes = require("./server/routes/categories");
 const todoItemsRoutes = require("./server/routes/todo_items");
 const todoItemsByCategoriesRoutes = require("./server/routes/todo_items_by_categories");
-const loginRoute = require('./server/routes/login');
+// const loginRoute = require('./server/routes/login');
 
 
 // Mount all resource routes
@@ -61,7 +61,7 @@ app.use("/db/users", usersRoutes(db));
 app.use("/db/todo_items", todoItemsRoutes(db));
 app.use("/db/categories", categoriesRoutes(db));
 app.use("/db/categories/todo_items", todoItemsByCategoriesRoutes(db));
-app.use("/login", loginRoute(db));
+// app.use("/db/users", loginRoute(db));
 
 // Note: mount other resources here, using the same pattern above
 

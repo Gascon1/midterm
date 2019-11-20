@@ -9,6 +9,29 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
+
+  router.post("/login", (req, res) => {
+    console.log('THIS IS REQ.body', req.body)
+    const query = {
+      text: `SELECT * FROM users
+              WHERE users.email = $1
+              AND users.password = $2`,
+      values: [req.body.email, req.body.password]
+    }
+
+    db.query(query)
+      .then(data => {
+        console.log(data.rows[0])
+        res.json(data.rows[0]);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -40,6 +63,7 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
 
   return router;
 };

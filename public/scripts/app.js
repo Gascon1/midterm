@@ -236,3 +236,42 @@ $(document).ready(function () {
       })
   })
 });
+
+$(document).ready(function () {
+
+  const $form = $('#login-form')
+  $form.on('submit', function (event) {
+    event.preventDefault();
+
+    userEmail = encodeURI($(this).serializeArray()[0].value);
+
+    userPassword = encodeURI($(this).serializeArray()[1].value);
+
+    console.log('user email :', userEmail, 'user password: ', userPassword);
+    $.ajax({
+      url: `http://localhost:8080/db/users/login`,
+      method: 'POST',
+      data: $(this).serialize()
+    })
+      .done(function (user) {
+
+        localStorage.setItem('user', user.id)
+
+        $('#login-account').slideUp(400, function () {
+          $('main').slideDown(400);
+        })
+        loadCategories();
+      })
+  })
+});
+
+$(document).ready(function () {
+
+  const $logout = $('#logout')
+  $logout.on('click', function () {
+    localStorage.setItem('user', null)
+
+  })
+
+});
+
