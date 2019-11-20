@@ -103,7 +103,7 @@ $(document).ready(function () {
     $(this).children("span").toggleClass("line-through")
   })
 
-  // toggles the lightbox once more setting icons is clicked
+  // turns on the lightbox once more setting icons is clicked
   $("main").on("click", "li .more-settings", function () {
     console.log($(this))
     $("#lightbox").toggleClass("lightbox")
@@ -111,16 +111,29 @@ $(document).ready(function () {
 
   })
 
-  $("#lightbox").on("click", function () {
-    console.log($(this))
+  // turns off the lightbox once the lightbox is clicked
+  $("#lightbox").on("click", function (event) {
+    if(event.target.id === "lightbox"){
     $("#lightbox").toggleClass("lightbox")
     $("#more-options").toggleClass("none")
+    }
   })
 
- $("#more-options").on("click",function (){
-  event.stopPropagation()
- })
+  // togles the more-options box icon and ul list associated to more-options box
+  $("body").on("click", "header", function () {
+    console.log($(this))
+    //Toggles the display of category icon
+    $(this).children(".fa-caret-down").toggleClass("open")
+    //Toggles the display of category items box
+    $(this).siblings(".category-items").slideToggle(700);
+    event.stopPropagation()
+  });
 
+   // toggles the checkmark of the category once it is clicked on (completed) in the more-options box
+
+   $("body").on("click", "div", function () {
+    $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
+  })
 
   //
   const $register = $('#profile');
