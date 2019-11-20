@@ -31,10 +31,12 @@ module.exports = (db) => {
       });
   });
 
-  router.put("/:id", (req, res) => {
-    console.log(req.params)
-    // console.log('THIS IS REQ.body', req.body)
 
+
+  // updates the user infos upon submission of the update form
+  // if a field is left empty, the value in the database doesnt change
+  // for that specific field
+  router.put("/:id", (req, res) => {
 
     if (req.body.password === "" && req.body.email === "") {
       console.log('this isnt doing a query')
