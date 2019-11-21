@@ -11,7 +11,7 @@ const createListItem = function (todo_item) {
   console.log(todo_item)
   let $settingsIcon = $('<i>').addClass('fas fa-ellipsis-v more-settings');
 
-  if(todo_item.is_completed){
+  if (todo_item.is_completed) {
     $bulletIcon.attr("class", "fas fa-check-circle custom-bullets")
     $span.toggleClass("line-through")
   }
@@ -82,17 +82,32 @@ $(document).ready(function () {
   const $form = $('#new-todo-item')
   $form.on('submit', function (event) {
     event.preventDefault();
-    $('.fa-plus').addClass('spin')
-    $.ajax({
-      url: "http://localhost:8080/db/todo_items",
-      method: 'POST',
-      data: $(this).serialize()
-    })
-      .done(function () {
-        $('#add-item').val('')
-        $('.fa-plus').removeClass('spin')
-        loadCategories();
+
+
+    todoItem = $(this).serializeArray()[0].value
+
+    if (!todoItem) {
+
+      $(this).addClass('invalid')
+      $(this).children('div').css({ 'border-radius': '6px', 'border-style': 'solid', 'border-color': '#EC487F', 'border-width': '2px' })
+
+    } else {
+      $(this).removeClass('invalid')
+      $(this).children('div').css({ 'border': 'none' })
+
+
+      $('.fa-plus').addClass('spin')
+      $.ajax({
+        url: "http://localhost:8080/db/todo_items",
+        method: 'POST',
+        data: $(this).serialize()
       })
+        .done(function () {
+          $('#add-item').val('')
+          $('.fa-plus').removeClass('spin')
+          loadCategories();
+        })
+    }
   })
 
   //loading categories when the page is ready if the user has already populated the database
@@ -117,16 +132,14 @@ $(document).ready(function () {
     $(this).children("i.custom-bullets").toggleClass("fas fa-check-circle")
     $(this).children("i.custom-bullets").toggleClass("far fa-circle")
     $(this).children("span").toggleClass("line-through")
-    console.log($(this).data("is_completed"))
     if ($(this).children("i.custom-bullets").attr("class").search("check") !== -1) {
-      console.log("add check")
-      console.log(!($(this).data("is_completed")))
-
       $.ajax({
         url: "http://localhost:8080/db/todo_items/update",
         method: 'PUT',
-        data: { "id": $(this).data("todo_id"),
-        "is_completed": !($(this).data("is_completed")) }
+        data: {
+          "id": $(this).data("todo_id"),
+          "is_completed": !($(this).data("is_completed"))
+        }
       })
 
 
@@ -139,8 +152,10 @@ $(document).ready(function () {
       $.ajax({
         url: "http://localhost:8080/db/todo_items/update",
         method: 'PUT',
-        data: { "id": $(this).data("todo_id"),
-        "is_completed": !($(this).data("is_completed")) }
+        data: {
+          "id": $(this).data("todo_id"),
+          "is_completed": !($(this).data("is_completed"))
+        }
       })
     }
   })
@@ -252,6 +267,24 @@ $(document).ready(function () {
     }
   })
 
+  const $logo = $('#logo');
+
+  $logo.on('click', function () {
+
+    $('#login-account').slideUp(400, function () {
+      $('#edit-account').slideUp(400, function () {
+        $('#create-account').slideUp(400, function () {
+
+          $('main').slideDown(400)
+        })
+      });
+    });
+
+  })
+
+
+
+
   //
   const $profile = $('#profile');
 
@@ -312,24 +345,46 @@ $(document).ready(function () {
 
   const $form = $('#registration-form')
   $form.on('submit', function (event) {
-    $(this).children('div').children('input').val('')
     event.preventDefault();
-    $.ajax({
-      url: "http://localhost:8080/db/users",
-      method: 'POST',
-      data: $(this).serialize()
-    })
-      .done(function () {
-        console.log($(this))
-        $('#create-account').slideUp(400, function () {
-          $('#SmarterEmailRegister').val('');
-          $('#SmarterPasswordRegister').val('');
-          $('#SmarterName').val('');
 
-          $('main').slideDown(400);
-        })
-        loadCategories();
+    userName = $(this).serializeArray()[0].value
+
+    userEmail = $(this).serializeArray()[1].value
+
+    userPassword = $(this).serializeArray()[2].value
+
+
+    if (!userEmail || !userPassword || !userName) {
+
+      console.log('im in the if')
+
+      $(this).parent('#create-account').addClass('invalid')
+      // $(this).parent('#login-account').addClass('shake')
+      $(this).children('div').children('label').css({ 'color': '#EC487F', "font-weight": '700' })
+      $(this).children('div').children('input').css({ 'border-color': '#EC487F', 'border-width': '2px' })
+
+    } else {
+      console.log('im in the else')
+      $(this).parent('#create-account').removeClass('invalid')
+      $(this).children('div').children('label').css({ 'color': '#fbfef9', "font-weight": '400' })
+      $(this).children('div').children('input').css({ 'border': 'none' })
+      $.ajax({
+        url: "http://localhost:8080/db/users",
+        method: 'POST',
+        data: $(this).serialize()
       })
+        .done(function () {
+          console.log($(this))
+          $('#create-account').slideUp(400, function () {
+            $('#SmarterEmailRegister').val('');
+            $('#SmarterPasswordRegister').val('');
+            $('#SmarterName').val('');
+
+            $('main').slideDown(400);
+          })
+          loadCategories();
+        })
+    }
   })
 });
 
@@ -337,36 +392,58 @@ $(document).ready(function () {
 
   const $form = $('#login-form')
   $form.on('submit', function (event) {
-
-
-
     event.preventDefault();
-    userEmail = encodeURI($(this).serializeArray()[0].value);
 
-    userPassword = encodeURI($(this).serializeArray()[1].value);
+    console.log($(this))
 
-    console.log('user email :', userEmail, 'user password: ', userPassword);
-    $.ajax({
-      url: `http://localhost:8080/db/users/login`,
-      method: 'POST',
-      data: $(this).serialize()
-    })
-      .done(function (user) {
-        console.log($(this))
+    userEmail = $(this).serializeArray()[0].value
+
+    userPassword = $(this).serializeArray()[1].value
 
 
-        localStorage.setItem('user', user.id)
-        $('#login-account').slideUp(400, function () {
-          $('#SmarterEmailLogin').val('');
-          $('#SmarterPasswordLogin').val('');
-          $('main').slideDown(400);
-          $('#login').slideUp(0);
-          $('#register').slideUp(0);
-          $('#profile').slideDown(0);
-          $('#logout').slideDown(0);
-        })
-        loadCategories();
+    if (!userEmail || !userPassword) {
+
+      console.log('im in the if')
+
+      $(this).parent('#login-account').addClass('invalid')
+      // $(this).parent('#login-account').addClass('shake')
+      $(this).children('div').children('label').css({ 'color': '#EC487F', "font-weight": '700' })
+      $(this).children('div').children('input').css({ 'border-color': '#EC487F', 'border-width': '2px' })
+
+    } else {
+      console.log('im in the else')
+      $(this).parent('#login-account').removeClass('invalid')
+      $(this).children('div').children('label').css({ 'color': '#fbfef9', "font-weight": '400' })
+      $(this).children('div').children('input').css({ 'border': 'none' })
+
+
+      userEmail = encodeURI($(this).serializeArray()[0].value);
+
+      userPassword = encodeURI($(this).serializeArray()[1].value);
+
+      // console.log('user email :', userEmail, 'user password: ', userPassword);
+      $.ajax({
+        url: `http://localhost:8080/db/users/login`,
+        method: 'POST',
+        data: $(this).serialize()
       })
+        .done(function (user) {
+          console.log($(this))
+
+
+          localStorage.setItem('user', user.id)
+          $('#login-account').slideUp(400, function () {
+            $('#SmarterEmailLogin').val('');
+            $('#SmarterPasswordLogin').val('');
+            $('main').slideDown(400);
+            $('#login').slideUp(0);
+            $('#register').slideUp(0);
+            $('#profile').slideDown(0);
+            $('#logout').slideDown(0);
+          })
+          loadCategories();
+        })
+    }
   })
 });
 
@@ -408,18 +485,6 @@ $(document).ready(function () {
           $('main').slideDown(400);
         })
       })
-
-
-      // why doesnt a .then or .done work on this (put???)
-      // .then(function () {
-
-      // $('#edit-account').slideUp(400, function () {
-
-      //   $('main').slideDown(400);
-      // })
-
-      // loadCategories();
-      // })
     }
   })
 });

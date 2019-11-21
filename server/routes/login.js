@@ -8,7 +8,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   // : email: password
-  router.get("/", (req, res) => {
+  router.post("/", (req, res) => {
     console.log('THIS IS REQ.PARAMS', req.params)
     const query = {
       text: `SELECT * FROM users
