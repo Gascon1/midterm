@@ -4,14 +4,6 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    // db.query(`SELECT * FROM categories;`)
-    //   .then(data => {
-    //     console.log("THIS IS IN CATEGORIES:", data.rows)
-    //     console.log("THIS IS TYPEOF:", typeof data.rows)
-    //     for (const category of data.rows){
-    //       console.log(category.name)
-    //     }
-
         db.query(`SELECT todo_items.id, todo_items.name, categories.name as category, todo_items.user_id
     FROM todo_items
     JOIN categories ON categories.id = category_id
