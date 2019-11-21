@@ -124,7 +124,7 @@ $(document).ready(function () {
     const encodedTodoItemName = encodeURI($(event.target).siblings("div").children("span").text());
     const todoItemName = decodeURI(encodedTodoItemName)
     localStorage.setItem("todoItemName", todoItemName)
-    localStorage.setItem("todoItemID",todoItemID)
+    localStorage.setItem("todoItemID", todoItemID)
 
     $.ajax({
       url: `http://localhost:8080/db/todo_items/${encodedTodoItemName}/categories`,
@@ -151,8 +151,10 @@ $(document).ready(function () {
       $.ajax({
         url: "http://localhost:8080/db/todo_items/update",
         method: 'DELETE',
-        data: { "todoItemName": localStorage.getItem("todoItemName"),
-        "category": $(event.target).data('category') }
+        data: {
+          "todoItemName": localStorage.getItem("todoItemName"),
+          "category": $(event.target).data('category')
+        }
       })
         .done(function () {
           loadCategories();
@@ -163,8 +165,10 @@ $(document).ready(function () {
       $.ajax({
         url: "http://localhost:8080/db/todo_items/update",
         method: 'POST',
-        data: { "todoItemName": localStorage.getItem("todoItemName"),
-         "category": $(event.target).data('category') }
+        data: {
+          "todoItemName": localStorage.getItem("todoItemName"),
+          "category": $(event.target).data('category')
+        }
       })
         .done(function () {
           loadCategories();
