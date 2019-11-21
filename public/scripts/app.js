@@ -31,9 +31,12 @@ const createUnorderedListElement = function (todo_items_arr) {
 const createCategory = function (category) {
   let $category = $('<section>').addClass('category')
   let $categoryHeader = $('<header>').addClass('category-header');
-  let $categoryIcon = $('<i>').addClass('fas fa-caret-down');
+  let $categoryIcon = $('<i>').addClass('fas fa-chevron-down');
+  let $categorySpan = $('<span>').text(category[0].category);
+
   $categoryHeader.append($categoryIcon)
-  $categoryHeader.append(category[0].category)
+  $categoryHeader.append($categorySpan)
+  // $categoryHeader.append(category[0].category)
   $category.append($categoryHeader)
 
   let $categoryUnorderedList = createUnorderedListElement(category)
@@ -94,7 +97,7 @@ $(document).ready(function () {
   $("main").on("click", "header", function () {
     console.log($(this))
     //Toggles the display of category icon
-    $(this).children(".fa-caret-down").toggleClass("open")
+    $(this).children(".fa-chevron-down").toggleClass("open")
     //Toggles the display of category items box
     $(this).siblings(".category-items").slideToggle(700);
     event.stopPropagation()
@@ -128,7 +131,7 @@ $(document).ready(function () {
   $("body").on("click", "header", function () {
     console.log($(this))
     //Toggles the display of category icon
-    $(this).children(".fa-caret-down").toggleClass("open")
+    $(this).children(".fa-chevron-down").toggleClass("open")
     //Toggles the display of category items box
     $(this).siblings(".category-items").slideToggle(700);
     event.stopPropagation()
