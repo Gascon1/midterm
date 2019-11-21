@@ -4,7 +4,8 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-        db.query(`SELECT todo_items.id, todo_items.name, categories.name as category, todo_items.user_id
+        db.query(`SELECT todo_items.id, todo_items.name, categories.name as category,
+        todo_items.user_id, todo_items.is_completed
     FROM todo_items
     JOIN categories ON categories.id = category_id
     GROUP BY categories.id, todo_items.id
