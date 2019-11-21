@@ -51,5 +51,31 @@ module.exports = (db) => {
     });
   })
 
+  router.put("/", (req, res) => {
+    console.log("THIS IS THE RIGHT ONE",req.body)
+    console.log("todoItem:",req.body.todoItemName )
+    console.log("category:", Number(req.body.category) )
+
+    const query = {
+      text: `UPDATE todo_items
+      SET is_completed = $2
+      WHERE todo_items.id = $1`,
+      // WHERE name='twilight' AND category_id = 3 AND user_id=1;
+
+      values: [Number(req.body.id), req.body.is_completed]
+    };
+
+    db.query(query)
+    .then(data => {
+      const todo_items = data.rows;
+      res.json({ todo_items });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  })
+
   return router
 }

@@ -3,11 +3,18 @@
 const createListItem = function (todo_item) {
   let $listItem = $('<li>')
   let $div = $('<div>')
+
   let $bulletIcon = $('<i>').addClass('far fa-circle custom-bullets');
-  let $span = $('<span>').attr("data-todo_id", todo_item.id)
-  $span.text(todo_item.name)
+  $div.attr("data-is_completed", todo_item.is_completed)
+  $div.attr("data-todo_id", todo_item.id)
+  let $span = $('<span>').text(todo_item.name)
+  console.log(todo_item)
   let $settingsIcon = $('<i>').addClass('fas fa-ellipsis-v more-settings');
 
+  if(todo_item.is_completed){
+    $bulletIcon.attr("class", "fas fa-check-circle custom-bullets")
+    $span.toggleClass("line-through")
+  }
 
   $div.append($bulletIcon).append($span)
   $listItem.append($div).append($settingsIcon)
@@ -110,6 +117,32 @@ $(document).ready(function () {
     $(this).children("i.custom-bullets").toggleClass("fas fa-check-circle")
     $(this).children("i.custom-bullets").toggleClass("far fa-circle")
     $(this).children("span").toggleClass("line-through")
+    console.log($(this).data("is_completed"))
+    if ($(this).children("i.custom-bullets").attr("class").search("check") !== -1) {
+      console.log("add check")
+      console.log(!($(this).data("is_completed")))
+
+      $.ajax({
+        url: "http://localhost:8080/db/todo_items/update",
+        method: 'PUT',
+        data: { "id": $(this).data("todo_id"),
+        "is_completed": !($(this).data("is_completed")) }
+      })
+
+
+
+    }
+
+    if ($(this).children("i.custom-bullets").attr("class").search("check") === -1) {
+      console.log("remove check")
+      console.log($(this).data("is_completed"))
+      $.ajax({
+        url: "http://localhost:8080/db/todo_items/update",
+        method: 'PUT',
+        data: { "id": $(this).data("todo_id"),
+        "is_completed": !($(this).data("is_completed")) }
+      })
+    }
   })
 
   // turns on the lightbox once more setting icons is clicked
@@ -186,15 +219,6 @@ $(document).ready(function () {
     }
   })
 
-  // // togles the more-options box icon and ul list associated to more-options box
-  // $("body").on("click", "header", function () {
-  //   console.log($(this))
-  //   //Toggles the display of category icon
-  //   $(this).children(".fa-chevron-down").toggleClass("open")
-  //   //Toggles the display of category items box
-  //   $(this).siblings(".category-items").slideToggle(700);
-  //   event.stopPropagation()
-  // });
 
   // toggles the checkmark of the category once it is clicked on (completed) in the more-options box
 
