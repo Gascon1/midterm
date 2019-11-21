@@ -15,8 +15,6 @@ module.exports = (db) => {
     FROM todo_items
     JOIN categories ON categories.id = category_id`)
       .then(data => {
-        // console.log(data.rows)
-        // console.log(data)
         const todo_items = data.rows;
         res.json({ todo_items });
       })
@@ -65,7 +63,6 @@ JOIN categories ON categories.id = category_id WHERE todo_items.name LIKE $1`,
         db.query(query)
           .then(data => {
             // console.log(data.rows)
-            console.log(data)
             const todo_items = data.rows;
             res.json({ todo_items });
           })

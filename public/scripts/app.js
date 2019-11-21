@@ -5,7 +5,8 @@ const createListItem = function (todo_item) {
   let $listItem = $('<li>')
   let $div = $('<div>')
   let $bulletIcon = $('<i>').addClass('far fa-circle custom-bullets');
-  let $span = $('<span>').text(todo_item.name)
+  let $span = $('<span>').attr("data-todo_id", todo_item.id)
+  $span.text(todo_item.name)
   let $settingsIcon = $('<i>').addClass('fas fa-ellipsis-v more-settings');
 
 
@@ -108,21 +109,23 @@ $(document).ready(function () {
   $("main").on("click", "li .more-settings", function () {
     $("#lightbox").toggleClass("lightbox")
     $("#more-options").toggleClass("none")
-    $("body div section ul li div i").attr("class","far fa-circle custom-bullets")
+    $("body div section ul li div i").attr("class", "far fa-circle custom-bullets")
+
+    const todoItemID = $(event.target).siblings("div").children("span").attr("data-todo_id")
 
     const encodedTodoItemName = encodeURI($(event.target).siblings("div").children("span").text());
     const todoItemName = decodeURI(encodedTodoItemName)
     localStorage.setItem("todoItemName", todoItemName)
+    localStorage.setItem("todoItemID",todoItemID)
+
     $.ajax({
       url: `http://localhost:8080/db/todo_items/${encodedTodoItemName}/categories`,
       method: "GET"
     })
       .then(function (database) {
-        console.log(database)
-        for(const data of database){
-          console.log(data)
+        for (const data of database) {
           $(`span:contains(${data.name})`).parent().children("i")
-          .toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
+            .toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
         }
       });
 
@@ -130,23 +133,34 @@ $(document).ready(function () {
 
   })
 
-// will do a post request to change the category of a todo item
+  // will do a post request to change the category of a todo item
   $("body").on("click", "div section ul li i", function (event) {
-    console.log("this the name of the todo item",localStorage.getItem("todoItemName"))
     localStorage.setItem("category", $(this).siblings("span").text())
+    let id = localStorage.getItem("todoItemID")
 
-    console.log(localStorage.getItem("todoItemName"),localStorage.getItem("category"))
-    if($(event.target).attr("class").search("check") !== -1){
-      console.log("remove check")
+
+    if ($(event.target).attr("class").search("check") !== -1) {
+      $.ajax({
+        url: "http://localhost:8080/db/todo_items/update",
+        method: 'DELETE',
+        data: { "todoItemName": localStorage.getItem("todoItemName"),
+        "category": $(event.target).data('category') }
+      })
+        .done(function () {
+          loadCategories();
+        })
     }
 
-    if($(event.target).attr("class").search("check") === -1){
-      console.log("add check")
+    if ($(event.target).attr("class").search("check") === -1) {
       $.ajax({
         url: "http://localhost:8080/db/todo_items/update",
         method: 'POST',
-        data: {"todoItemName": localStorage.getItem("todoItemName"), "category":localStorage.getItem("category")}
+        data: { "todoItemName": localStorage.getItem("todoItemName"),
+         "category": $(event.target).data('category') }
       })
+        .done(function () {
+          loadCategories();
+        })
     }
 
   })
