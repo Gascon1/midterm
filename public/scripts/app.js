@@ -1,6 +1,4 @@
 
-
-
 // create category list item element in html
 const createListItem = function (todo_item) {
   let $listItem = $('<li>')
