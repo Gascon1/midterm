@@ -66,6 +66,10 @@ input {
   line-height: 26px; //FIX THIS TOMORROW
 }
 
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
 #post-button {
   font-size: 1em;
   background-color: #fbfef9;
@@ -77,14 +81,11 @@ input {
   padding: 0 1rem;
 }
 
-#post-button:hover i {
+#post-button i.spin {
    -webkit-animation:spin 1s linear infinite;
     -moz-animation:spin 1s linear infinite;
     animation:spin 1s linear infinite;
 }
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 #input-box {
   width: 100%;

@@ -74,12 +74,15 @@ $(document).ready(function () {
   const $form = $('#new-todo-item')
   $form.on('submit', function (event) {
     event.preventDefault();
+    // ('#id-button').addClass('spin')
     $.ajax({
       url: "http://localhost:8080/db/todo_items",
       method: 'POST',
       data: $(this).serialize()
     })
       .done(function () {
+        $('#add-item').val('')
+        // ('#id-button').removeClass('spin')
         loadCategories();
       })
   })
@@ -277,7 +280,6 @@ $(document).ready(function () {
   const $form = $('#update-form')
   $form.on('submit', function (event) {
     event.preventDefault();
-
     userEmail = encodeURI($(this).serializeArray()[0].value);
 
     userPassword = encodeURI($(this).serializeArray()[1].value);
@@ -289,12 +291,26 @@ $(document).ready(function () {
       url: `http://localhost:8080/db/users/${userID}`,
       method: 'PUT',
       data: $(this).serialize()
-    })
-      .done(function (user) {
-        console.log(user)
-        console.log($(this))
-        loadCategories();
+
+
+    }).always(function () {
+      $('#edit-account').slideUp(400, function () {
+
+        $('main').slideDown(400);
       })
+    })
+
+
+    // why doesnt a .then or .done work on this (put???)
+    // .then(function () {
+
+    // $('#edit-account').slideUp(400, function () {
+
+    //   $('main').slideDown(400);
+    // })
+
+    // loadCategories();
+    // })
   })
 });
 
