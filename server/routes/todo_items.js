@@ -31,107 +31,137 @@ module.exports = (db) => {
 JOIN categories ON categories.id = category_id WHERE todo_items.name LIKE $1`,
       values: [decodeURI(req.params["todo_item"])]
     };
-          db.query(query)
-          .then(data => {
-            res.json(data.rows)
-          })
-          .catch(err => {
-            res
-              .status(500)
-              .json({ error: err.message });
-          });
-   })
+    db.query(query)
+      .then(data => {
+        res.json(data.rows)
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  })
 
   router.post("/", (req, res) => {
     let userTodoItem = req.body.text
+    let queries = [];
 
-    if (userTodoItem.search('eat') >= 0) {
-      const query = {
-        text: `INSERT INTO todo_items (name, category_id, user_id)
+
+    console.log(userTodoItem)
+
+    if (userTodoItem.indexOf('eat') >= 0 || userTodoItem.indexOf('read') >= 0
+      || userTodoItem.indexOf('buy') >= 0 || userTodoItem.indexOf('watch') >= 0) {
+
+
+      if (userTodoItem.indexOf('eat') >= 0) {
+        const query = {
+          text: `INSERT INTO todo_items (name, category_id, user_id)
           VALUES ($1, $2, $3)`,
-        values: [req.body.text, 2, 1]
-      };
+          values: [req.body.text, 2, 1]
+        };
+        // setTimeout(function () {
 
-      db.query(query)
-        .then(data => {
-          // console.log(data.rows)
-          // console.log(data)
-          const todo_items = data.rows;
-          res.json({ todo_items });
-        })
-        .catch(err => {
-          console.log('we are in teh catch')
-          res
-            .status(500)
-            .json({ error: err.message });
-        });
-    }
-    if (userTodoItem.search('read') >= 0) {
-      const query = {
-        text: `INSERT INTO todo_items (name, category_id, user_id)
+        queries.push(db.query(query))
+        // .then(data => {
+        //   console.log('we are in the then of eat')
+
+        //   // console.log(data.rows)
+        //   // console.log(data)
+        //   const todo_items = data.rows;
+        //   res.json({ todo_items });
+        // })
+        // .catch(err => {
+        //   console.log('we are in the catch of eat')
+        //   res
+        //     .status(500)
+        //     .json({ error: err.message });
+        // });
+        // }, 3000)
+      }
+      if (userTodoItem.indexOf('read') >= 0) {
+        const query = {
+          text: `INSERT INTO todo_items (name, category_id, user_id)
           VALUES ($1, $2, $3)`,
-        values: [req.body.text, 3, 1]
-      };
+          values: [req.body.text, 3, 1]
+        };
 
-      db.query(query)
-        .then(data => {
-          // console.log(data.rows)
-          // console.log(data)
-          const todo_items = data.rows;
-          res.json({ todo_items });
-        })
-        .catch(err => {
-          console.log('we are in teh catch')
-          res
-            .status(500)
-            .json({ error: err.message });
-        });
-    }
+        // setTimeout(function () {
 
-    if (userTodoItem.search('watch') >= 0) {
-      const query = {
-        text: `INSERT INTO todo_items (name, category_id, user_id)
+        queries.push(db.query(query))
+        // .then(data => {
+        //   // console.log(data.rows)
+        //   // console.log(data)
+        //   const todo_items = data.rows;
+        //   res.json({ todo_items });
+        // })
+        // .catch(err => {
+        //   console.log('we are in the catch of read')
+        //   console.log(err)
+        //   res
+        //     .status(500)
+        //     .json({ error: err.message });
+        // });
+        // }, 3000)
+      }
+
+      if (userTodoItem.indexOf('watch') >= 0) {
+        const query = {
+          text: `INSERT INTO todo_items (name, category_id, user_id)
           VALUES ($1, $2, $3)`,
-        values: [req.body.text, 1, 1]
-      };
+          values: [req.body.text, 1, 1]
+        };
 
-      db.query(query)
-        .then(data => {
-          // console.log(data.rows)
-          // console.log(data)
-          const todo_items = data.rows;
-          res.json({ todo_items });
-        })
-        .catch(err => {
-          console.log('we are in teh catch')
-          res
-            .status(500)
-            .json({ error: err.message });
-        });
-    }
+        // setTimeout(function () {
 
-    if (userTodoItem.search('buy') >= 0) {
-      const query = {
-        text: `INSERT INTO todo_items (name, category_id, user_id)
+        db.query(query)
+        // .then(data => {
+        //   // console.log(data.rows)
+        //   // console.log(data)
+        //   const todo_items = data.rows;
+        //   res.json({ todo_items });
+        // })
+        // .catch(err => {
+        //   console.log('we are in the catch of watch')
+        //   res
+        //     .status(500)
+        //     .json({ error: err.message });
+        // });
+        // }, 3000)
+      }
+
+      if (userTodoItem.indexOf('buy') >= 0) {
+        const query = {
+          text: `INSERT INTO todo_items (name, category_id, user_id)
           VALUES ($1, $2, $3)`,
-        values: [req.body.text, 4, 1]
-      };
+          values: [req.body.text, 4, 1]
+        };
 
-      db.query(query)
-        .then(data => {
-          // console.log(data.rows)
-          // console.log(data)
-          const todo_items = data.rows;
-          res.json({ todo_items });
-        })
-        .catch(err => {
-          console.log('we are in teh catch')
-          res
-            .status(500)
-            .json({ error: err.message });
-        });
+        // setTimeout(function () {
+
+        db.query(query)
+        // .then(data => {
+        //   // console.log(data.rows)
+        //   // console.log(data)
+        //   const todo_items = data.rows;
+        //   res.json({ todo_items });
+        // })
+        // .catch(err => {
+        //   console.log('we are in the catch of buy')
+        //   res
+        //     .status(500)
+        //     .json({ error: err.message });
+        // });
+        // }, 3000)
+      }
+      setTimeout(function () {
+
+        Promise.all(queries)
+          .then(result => {
+            res.send()
+          })
+      }, 3000)
+
     }
-
     else {
 
       const encodedUserInput = encodeURI(req.body.text);
@@ -145,7 +175,7 @@ JOIN categories ON categories.id = category_id WHERE todo_items.name LIKE $1`,
 
           const query = {
             text: `INSERT INTO todo_items (name, category_id, user_id)
-          VALUES ($1, $2, $3)`,
+            VALUES ($1, $2, $3)`,
             values: [req.body.text, item.category, item.user_id]
           };
 
@@ -164,7 +194,6 @@ JOIN categories ON categories.id = category_id WHERE todo_items.name LIKE $1`,
         }
       }))
     }
-    // console.log(request(URL, findCategory))
 
   });
 

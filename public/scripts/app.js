@@ -288,6 +288,7 @@ $(document).ready(function () {
 
   const $form = $('#registration-form')
   $form.on('submit', function (event) {
+    $(this).children('div').children('input').val('')
     event.preventDefault();
     $.ajax({
       url: "http://localhost:8080/db/users",
@@ -295,7 +296,12 @@ $(document).ready(function () {
       data: $(this).serialize()
     })
       .done(function () {
+        console.log($(this))
         $('#create-account').slideUp(400, function () {
+          $('#SmarterEmailRegister').val('');
+          $('#SmarterPasswordRegister').val('');
+          $('#SmarterName').val('');
+
           $('main').slideDown(400);
         })
         loadCategories();
@@ -307,8 +313,10 @@ $(document).ready(function () {
 
   const $form = $('#login-form')
   $form.on('submit', function (event) {
-    event.preventDefault();
 
+
+
+    event.preventDefault();
     userEmail = encodeURI($(this).serializeArray()[0].value);
 
     userPassword = encodeURI($(this).serializeArray()[1].value);
@@ -320,10 +328,13 @@ $(document).ready(function () {
       data: $(this).serialize()
     })
       .done(function (user) {
+        console.log($(this))
+
 
         localStorage.setItem('user', user.id)
-
         $('#login-account').slideUp(400, function () {
+          $('#SmarterEmailLogin').val('');
+          $('#SmarterPasswordLogin').val('');
           $('main').slideDown(400);
           $('#login').slideUp(0);
           $('#register').slideUp(0);
@@ -345,33 +356,47 @@ $(document).ready(function () {
 
     userPassword = encodeURI($(this).serializeArray()[1].value);
 
-    const userID = localStorage.getItem('user')
 
-    console.log('user email :', userEmail, 'user password: ', userPassword);
-    $.ajax({
-      url: `http://localhost:8080/db/users/${userID}`,
-      method: 'PUT',
-      data: $(this).serialize()
+    if (!userEmail && !userPassword) {
+      $(this).parent('#edit-account').addClass('invalid')
+      // $(this).parent('#edit-account').addClass('shake')
+      $(this).children('div').children('label').css({ 'color': '#EC487F', "font-weight": '700' })
+      $(this).children('div').children('input').css({ 'border-color': '#EC487F', 'border-width': '2px' })
+
+    } else {
+      $(this).parent('#edit-account').removeClass('invalid')
+      $(this).children('div').children('label').css({ 'color': '#fbfef9', "font-weight": '400' })
+      $(this).children('div').children('input').css({ 'border': 'none' })
+      $(this).children('div').children('input').val('')
+
+      const userID = localStorage.getItem('user')
+
+      console.log('user email :', userEmail, 'user password: ', userPassword);
+      $.ajax({
+        url: `http://localhost:8080/db/users/${userID}`,
+        method: 'PUT',
+        data: $(this).serialize()
 
 
-    }).always(function () {
-      $('#edit-account').slideUp(400, function () {
+      }).always(function () {
+        $('#edit-account').slideUp(400, function () {
 
-        $('main').slideDown(400);
+          $('main').slideDown(400);
+        })
       })
-    })
 
 
-    // why doesnt a .then or .done work on this (put???)
-    // .then(function () {
+      // why doesnt a .then or .done work on this (put???)
+      // .then(function () {
 
-    // $('#edit-account').slideUp(400, function () {
+      // $('#edit-account').slideUp(400, function () {
 
-    //   $('main').slideDown(400);
-    // })
+      //   $('main').slideDown(400);
+      // })
 
-    // loadCategories();
-    // })
+      // loadCategories();
+      // })
+    }
   })
 });
 
