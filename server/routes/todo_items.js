@@ -28,7 +28,6 @@ module.exports = (db) => {
   });
 
   router.get("/:todo_item/categories", (req, res) => {
-    console.log("THIS IS IN THE RIGHT GET with params", req.params)
     const query = {
       text: `SELECT DISTINCT categories.name FROM todo_items
 JOIN categories ON categories.id = category_id WHERE todo_items.name LIKE $1`,

@@ -133,13 +133,20 @@ $(document).ready(function () {
 // will do a post request to change the category of a todo item
   $("body").on("click", "div section ul li i", function (event) {
     console.log("this the name of the todo item",localStorage.getItem("todoItemName"))
-    console.log("this is the THIS", this)
+    localStorage.setItem("category", $(this).siblings("span").text())
+
+    console.log(localStorage.getItem("todoItemName"),localStorage.getItem("category"))
     if($(event.target).attr("class").search("check") !== -1){
       console.log("remove check")
     }
 
     if($(event.target).attr("class").search("check") === -1){
       console.log("add check")
+      $.ajax({
+        url: "http://localhost:8080/db/todo_items/update",
+        method: 'POST',
+        data: {"todoItemName": localStorage.getItem("todoItemName"), "category":localStorage.getItem("category")}
+      })
     }
 
   })
