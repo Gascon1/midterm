@@ -193,7 +193,7 @@ $(document).ready(function () {
     })
       .then(function (database) {
         for (const data of database) {
-          $(`span:contains(${data.name})`).parent().children("i")
+          $(`body div span:contains(${data.name})`).parent().children("i")
             .toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
         }
       });
@@ -475,13 +475,13 @@ $(document).ready(function () {
       $(this).parent('#edit-account').addClass('invalid')
       // $(this).parent('#edit-account').addClass('shake')
       $(this).children('div').children('label').css({ 'color': '#EC487F', "font-weight": '700' })
-      $(this).children('div').children('input').css({ 'border-color': '#EC487F', 'border-width': '2px' })
+      $(this).children('div').children('input').css({ 'border-radius': '6px', 'border-style': 'solid', 'border-color': '#EC487F', 'border-width': '2px' })
 
     } else {
+      console.log('im in the else')
       $(this).parent('#edit-account').removeClass('invalid')
       $(this).children('div').children('label').css({ 'color': '#fbfef9', "font-weight": '400' })
       $(this).children('div').children('input').css({ 'border': 'none' })
-      $(this).children('div').children('input').val('')
 
       const userID = localStorage.getItem('user')
 
@@ -492,10 +492,11 @@ $(document).ready(function () {
         data: $(this).serialize()
 
 
-      }).always(function () {
+      }).done(function () {
         $('#edit-account').slideUp(400, function () {
-
           $('main').slideDown(400);
+          $('#NewSmarterEmailLogin').val('');
+          $('#NewSmarterPasswordLogin').val('');
         })
       })
     }
@@ -512,6 +513,7 @@ $(document).ready(function () {
     $('#login').slideDown(0);
     $('#profile').slideUp(0);
     $('#logout').slideUp(0);
+    $('main').slideUp(400);
 
   })
 });

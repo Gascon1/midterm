@@ -38,17 +38,21 @@ module.exports = (db) => {
   // for that specific field
   router.put("/:id", (req, res) => {
 
-    if (req.body.password === "" && req.body.email === "") {
-      console.log('this isnt doing a query')
-      db.catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    // if (req.body.password === "" && req.body.email === "") {
+    //   console.log('this isnt doing a query')
 
-    } else if (req.body.email === "") {
+    //   db.then()
+
+    //   db.catch(err => {
+    //     res
+    //       .status(500)
+    //       .json({ error: err.message });
+    //   });
+
+    // } else
+    if (req.body.email === "") {
       const query = {
-        text: `UPDATE users SET password = $1 WHERE id = $2`,
+        text: `UPDATE users SET password = $1 WHERE id = $2 RETURNING *`,
         values: [req.body.password, req.params.id]
       }
       db.query(query)
@@ -60,7 +64,7 @@ module.exports = (db) => {
     } else if (req.body.password === "") {
 
       const query = {
-        text: `UPDATE users SET email = $1 WHERE id = $2`,
+        text: `UPDATE users SET email = $1 WHERE id = $2 RETURNING *`,
         values: [req.body.email, req.params.id]
       }
       db.query(query)
@@ -72,7 +76,7 @@ module.exports = (db) => {
     } else {
 
       const query = {
-        text: `UPDATE users SET email $1, password = $2 WHERE id = $3`,
+        text: `UPDATE users SET email = $1, password = $2 WHERE id = $3 RETURNING *`,
         values: [req.body.email, req.body.password, req.params.id]
       }
       db.query(query)
@@ -81,6 +85,7 @@ module.exports = (db) => {
           res.json(data.rows[0]);
         })
         .catch(err => {
+          console.log('im in the catch of updating the email and the password')
           res
             .status(500)
             .json({ error: err.message });
