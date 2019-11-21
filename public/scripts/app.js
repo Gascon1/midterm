@@ -4,7 +4,8 @@ const createListItem = function (todo_item) {
   let $listItem = $('<li>')
   let $div = $('<div>')
   let $bulletIcon = $('<i>').addClass('far fa-circle custom-bullets');
-  let $span = $('<span>').text(todo_item.name)
+  let $span = $('<span>').attr("data-todo_id", todo_item.id)
+  $span.text(todo_item.name)
   let $settingsIcon = $('<i>').addClass('fas fa-ellipsis-v more-settings');
 
 
@@ -96,7 +97,6 @@ $(document).ready(function () {
 
   // togles the category icon and ul list associated to the category
   $("main").on("click", "header", function () {
-    console.log($(this))
     //Toggles the display of category icon
     $(this).children(".fa-chevron-down").toggleClass("open")
     //Toggles the display of category items box
@@ -105,20 +105,74 @@ $(document).ready(function () {
   });
 
   // toggles the checkmark of the todo item once it is clicked on (completed)
-
+  // if broken verify space between i and .custom bullets
   $("main").on("click", "div", function () {
-    $(this).children("i .custom-bullets").toggleClass("fas fa-check-circle")
-    $(this).children("i .custom-bullets").toggleClass("far fa-circle")
+    $(this).children("i.custom-bullets").toggleClass("fas fa-check-circle")
+    $(this).children("i.custom-bullets").toggleClass("far fa-circle")
     $(this).children("span").toggleClass("line-through")
   })
 
   // turns on the lightbox once more setting icons is clicked
+  // and makes the categories appear for the clicked todo item
   $("main").on("click", "li .more-settings", function () {
-    console.log($(this))
     $("#lightbox").toggleClass("lightbox")
     $("#more-options").toggleClass("none")
+    $("body div section ul li div i").attr("class", "far fa-circle custom-bullets")
+
+    const todoItemID = $(event.target).siblings("div").children("span").attr("data-todo_id")
+
+    const encodedTodoItemName = encodeURI($(event.target).siblings("div").children("span").text());
+    const todoItemName = decodeURI(encodedTodoItemName)
+    localStorage.setItem("todoItemName", todoItemName)
+    localStorage.setItem("todoItemID",todoItemID)
+
+    $.ajax({
+      url: `http://localhost:8080/db/todo_items/${encodedTodoItemName}/categories`,
+      method: "GET"
+    })
+      .then(function (database) {
+        for (const data of database) {
+          $(`span:contains(${data.name})`).parent().children("i")
+            .toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
+        }
+      });
+
+
 
   })
+
+  // will do a post request to change the category of a todo item
+  $("body").on("click", "div section ul li i", function (event) {
+    localStorage.setItem("category", $(this).siblings("span").text())
+    let id = localStorage.getItem("todoItemID")
+
+
+    if ($(event.target).attr("class").search("check") !== -1) {
+      $.ajax({
+        url: "http://localhost:8080/db/todo_items/update",
+        method: 'DELETE',
+        data: { "todoItemName": localStorage.getItem("todoItemName"),
+        "category": $(event.target).data('category') }
+      })
+        .done(function () {
+          loadCategories();
+        })
+    }
+
+    if ($(event.target).attr("class").search("check") === -1) {
+      $.ajax({
+        url: "http://localhost:8080/db/todo_items/update",
+        method: 'POST',
+        data: { "todoItemName": localStorage.getItem("todoItemName"),
+         "category": $(event.target).data('category') }
+      })
+        .done(function () {
+          loadCategories();
+        })
+    }
+
+  })
+
 
   // turns off the lightbox once the lightbox is clicked
   $("#lightbox").on("click", function (event) {
@@ -128,21 +182,24 @@ $(document).ready(function () {
     }
   })
 
-  // togles the more-options box icon and ul list associated to more-options box
-  $("body").on("click", "header", function () {
-    console.log($(this))
-    //Toggles the display of category icon
-    $(this).children(".fa-chevron-down").toggleClass("open")
-    //Toggles the display of category items box
-    $(this).siblings(".category-items").slideToggle(700);
-    event.stopPropagation()
-  });
+  // // togles the more-options box icon and ul list associated to more-options box
+  // $("body").on("click", "header", function () {
+  //   console.log($(this))
+  //   //Toggles the display of category icon
+  //   $(this).children(".fa-chevron-down").toggleClass("open")
+  //   //Toggles the display of category items box
+  //   $(this).siblings(".category-items").slideToggle(700);
+  //   event.stopPropagation()
+  // });
 
   // toggles the checkmark of the category once it is clicked on (completed) in the more-options box
 
-  $("body").on("click", "div", function () {
-    $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
+  $("body").on("click", "div section ul li i", function (event) {
+
+    $(event.target).toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
   })
+
+
 
   //
   const $register = $('#register');
