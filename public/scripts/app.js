@@ -74,7 +74,7 @@ $(document).ready(function () {
   const $form = $('#new-todo-item')
   $form.on('submit', function (event) {
     event.preventDefault();
-    // ('#id-button').addClass('spin')
+    $('.fa-plus').addClass('spin')
     $.ajax({
       url: "http://localhost:8080/db/todo_items",
       method: 'POST',
@@ -82,7 +82,7 @@ $(document).ready(function () {
     })
       .done(function () {
         $('#add-item').val('')
-        // ('#id-button').removeClass('spin')
+        $('.fa-plus').removeClass('spin')
         loadCategories();
       })
   })
