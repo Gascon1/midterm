@@ -96,47 +96,54 @@ $(document).ready(function () {
   });
 
   // toggles the checkmark of the todo item once it is clicked on (completed)
-
+  // if broken verify space between i and .custom bullets
   $("main").on("click", "div", function () {
-    $(this).children("i .custom-bullets").toggleClass("fas fa-check-circle")
-    $(this).children("i .custom-bullets").toggleClass("far fa-circle")
+    $(this).children("i.custom-bullets").toggleClass("fas fa-check-circle")
+    $(this).children("i.custom-bullets").toggleClass("far fa-circle")
     $(this).children("span").toggleClass("line-through")
   })
 
   // turns on the lightbox once more setting icons is clicked
+  // and makes the categories appear for the clicked todo item
   $("main").on("click", "li .more-settings", function () {
     $("#lightbox").toggleClass("lightbox")
     $("#more-options").toggleClass("none")
     $("body div section ul li div i").attr("class","far fa-circle custom-bullets")
 
-    const encoded = encodeURI($(event.target).siblings("div").children("span").text());
-    const decoded = decodeURI(encoded)
+    const encodedTodoItemName = encodeURI($(event.target).siblings("div").children("span").text());
+    const todoItemName = decodeURI(encodedTodoItemName)
+    localStorage.setItem("todoItemName", todoItemName)
     $.ajax({
-      url: `http://localhost:8080/db/todo_items/${encoded}/categories`,
+      url: `http://localhost:8080/db/todo_items/${encodedTodoItemName}/categories`,
       method: "GET"
     })
       .then(function (database) {
+        console.log(database)
         for(const data of database){
+          console.log(data)
           $(`span:contains(${data.name})`).parent().children("i")
           .toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
         }
       });
+
+
+
   })
 
-  // makes the checkmark appear for all categories that the specific todo item (that was clicked) is part
-  //of
-  $("body").on("click", "header", function (event) {
-   if($(event.target).siblings("#lightbox-ul").attr("class") === ""){
-     console.log("do the GET")
-     $.ajax({
-      url: "http://localhost:8080/db/categories/todo_items",
-      method: "GET"
-    })
-      .then(function (database) {
-        console.log(database);
-      });
-   }
-  });
+// will do a post request to change the category of a todo item
+  $("body").on("click", "div section ul li i", function (event) {
+    console.log("this the name of the todo item",localStorage.getItem("todoItemName"))
+    console.log("this is the THIS", this)
+    if($(event.target).attr("class").search("check") !== -1){
+      console.log("remove check")
+    }
+
+    if($(event.target).attr("class").search("check") === -1){
+      console.log("add check")
+    }
+
+  })
+
 
   // turns off the lightbox once the lightbox is clicked
   $("#lightbox").on("click", function (event) {
@@ -149,8 +156,9 @@ $(document).ready(function () {
 
   // toggles the checkmark of the category once it is clicked on (completed) in the more-options box
 
-  $("body").on("click", "div", function () {
-    $(this).children(".custom-bullets").toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
+  $("body").on("click", "div section ul li i", function (event) {
+
+    $(event.target).toggleClass("fas fa-check-circle").toggleClass("far fa-circle")
   })
 
 
