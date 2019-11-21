@@ -86,7 +86,12 @@ $(document).ready(function () {
 
     todoItem = $(this).serializeArray()[0].value
 
-    if (!todoItem) {
+    const user = localStorage.getItem('user')
+
+    console.log(user)
+
+
+    if (!todoItem || !user) {
 
       $(this).addClass('invalid')
       $(this).children('div').css({ 'border-radius': '6px', 'border-style': 'solid', 'border-color': '#EC487F', 'border-width': '2px' })
@@ -105,6 +110,14 @@ $(document).ready(function () {
         .done(function () {
           $('#add-item').val('')
           $('.fa-plus').removeClass('spin')
+          $('#login-account').slideUp(400, function () {
+            $('#edit-account').slideUp(400, function () {
+              $('#create-account').slideUp(400, function () {
+
+                $('main').slideDown(400)
+              })
+            });
+          });
           loadCategories();
         })
     }
